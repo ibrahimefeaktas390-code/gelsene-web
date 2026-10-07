@@ -1,0 +1,20 @@
+{
+  "name": "gelsene-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "gelseneapp.com — Gelsene uygulamasının statik tanıtım sitesi",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/sync-legal.mjs --check && astro build",
+    "preview": "astro preview",
+    "sync:legal": "node scripts/sync-legal.mjs",
+    "check:legal": "node scripts/sync-legal.mjs --check"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "astro": "^7.3.6"
+  }
+}

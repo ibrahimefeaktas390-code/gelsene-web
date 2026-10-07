@@ -1,0 +1,26 @@
+---
+import LegalDocument from '../components/LegalDocument.astro';
+import Base from '../layouts/Base.astro';
+import { trDateToIso } from '../data/dates';
+import { LEGAL_DOCUMENTS } from '../data/legal';
+import { LEGAL_UPDATED, SITE, absoluteUrl } from '../data/site';
+
+const path = '/kullanim-sartlari';
+const title = `${LEGAL_DOCUMENTS.terms.title} | Gelsene`;
+const description =
+  'Gelsene Kullanım Şartları: hizmetin tanımı, 18 yaş sınırı, hesap ve kimlik doğrulama, yasaklı davranışlar, içerik moderasyonu ve hesabın sonlandırılması.';
+
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: LEGAL_DOCUMENTS.terms.title,
+  url: absoluteUrl(path),
+  inLanguage: 'tr-TR',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  dateModified: trDateToIso(LEGAL_UPDATED),
+};
+---
+
+<Base title={title} description={description} path={path} jsonLd={[webPage]} ogType="article">
+  <LegalDocument doc="terms" />
+</Base>

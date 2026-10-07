@@ -1,0 +1,156 @@
+---
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import Base from '../layouts/Base.astro';
+import { SUPPORT_FAQ, contactMailto } from '../data/content';
+import { CONTACT_EMAIL, SITE, absoluteUrl } from '../data/site';
+
+const path = '/destek';
+const title = 'Destek ve İletişim — Hesap silme, veri talepleri | Gelsene';
+const description = `Gelsene destek sayfası: ${CONTACT_EMAIL} adresinden bize ulaş, sık sorulan soruların yanıtlarını bul, hesabını nasıl sileceğini ve KVKK kapsamında veri talebini nasıl ileteceğini öğren.`;
+
+const contactPage = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Gelsene Destek',
+  url: absoluteUrl(path),
+  inLanguage: 'tr-TR',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  about: { '@id': `${SITE.url}/#organization` },
+};
+---
+
+<Base title={title} description={description} path={path} jsonLd={[contactPage]}>
+  <div class="container narrow">
+    <header class="page-head">
+      <h1>Destek</h1>
+      <p class="lead">Bir sorun mu yaşıyorsun, bir şey mi merak ediyorsun? Buradayız.</p>
+    </header>
+
+    <section class="card contact" aria-labelledby="contact-title">
+      <span class="contact-icon"><Icon name="mail" size={28} /></span>
+      <div>
+        <h2 id="contact-title">Bize yaz</h2>
+        <p>
+          Her türlü soru, öneri ve şikâyetin için e-posta adresimiz:{' '}
+          <a href={contactMailto('Gelsene destek')}><strong>{CONTACT_EMAIL}</strong></a>
+        </p>
+        <p class="muted small">
+          Hesabınla ilgili taleplerde, Gelsene’ye kayıtlı olduğun e-posta adresinden yazarsan seni daha hızlı doğrulayıp
+          yardımcı olabiliriz. Şifreni asla e-postayla paylaşma; biz de senden istemeyiz.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-sm" id="hesap-silme" aria-labelledby="delete-title">
+      <h2 id="delete-title"><span class="title-icon"><Icon name="trash" /></span> Hesabımı nasıl silerim?</h2>
+      <p>Hesabını istediğin an, uygulamanın içinden kendin silebilirsin:</p>
+      <ol class="how-to">
+        <li>Gelsene’de <strong>Profil</strong> ekranına git ve sağ üstteki dişli simgesine dokunarak <strong>Ayarlar</strong>’ı aç.</li>
+        <li><strong>Hesap</strong> bölümünün altındaki <strong>Hesabı Sil</strong>’e dokun.</li>
+        <li>Açılan uyarıda <strong>Hesabımı Sil</strong>’i seçerek onayla.</li>
+      </ol>
+      <p>
+        Bu işlem geri alınamaz. Hesabın; oluşturduğun aktiviteler, katılımların, mesajların ve yüklediğin dosyalarla
+        (profil ve aktivite fotoğrafları, sohbette gönderdiğin fotoğraf ve sesli mesajlar, doğrulama selfie’si) birlikte
+        silinir. Yasal saklama yükümlülüğü bulunan veriler ise ilgili mevzuatta öngörülen süre kadar saklanır
+        (<a href="/gizlilik">Gizlilik Politikası</a>, madde 5).
+      </p>
+      <p>
+        Uygulamaya erişemiyorsan (örneğin telefonunu kaybettiysen), kayıtlı e-posta adresinden{' '}
+        <a href={contactMailto('Hesap silme talebi')}>{CONTACT_EMAIL}</a> adresine “Hesap silme talebi” konulu bir e-posta
+        gönder; hesabını senin için sileriz.
+      </p>
+    </section>
+
+    <section class="section-sm" id="veri-talebi" aria-labelledby="data-title">
+      <h2 id="data-title"><span class="title-icon"><Icon name="file" /></span> Kişisel verilerimle ilgili nasıl talepte bulunurum?</h2>
+      <p>
+        6698 sayılı KVKK’nın 11. maddesi uyarınca; verilerinin işlenip işlenmediğini öğrenme, bilgi isteme, düzeltilmesini
+        veya silinmesini isteme gibi hakların var. Silme hakkını yukarıdaki <strong>Hesabı Sil</strong> adımıyla doğrudan
+        kullanabilirsin. Diğer talepler için:
+      </p>
+      <ol class="how-to">
+        <li>
+          <a href={contactMailto('KVKK bilgi talebi')}>{CONTACT_EMAIL}</a> adresine, mümkünse Gelsene’ye kayıtlı e-posta
+          adresinden yaz.
+        </li>
+        <li>Konu satırına talebini belirt (ör. “KVKK bilgi talebi”, “Veri düzeltme talebi”).</li>
+        <li>Ne istediğini kısaca açıkla; hesabını bulabilmemiz için kullanıcı adını da ekle.</li>
+      </ol>
+      <p>
+        Selfie doğrulaması için verdiğin açık rızayı geri çekmek istersen de aynı adrese yazabilir ya da hesabını
+        silebilirsin. Ayrıntılar için <a href="/gizlilik">Gizlilik Politikası</a>’na göz atabilirsin.
+      </p>
+    </section>
+
+    <section class="section-sm" id="sss" aria-labelledby="support-faq-title">
+      <h2 id="support-faq-title">Sık sorulanlar</h2>
+      <Faq items={SUPPORT_FAQ} />
+    </section>
+  </div>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+    color: var(--muted);
+  }
+
+  .contact {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-top: 16px;
+  }
+
+  .contact h2 {
+    font-size: 1.35rem;
+  }
+
+  .contact a {
+    overflow-wrap: anywhere;
+  }
+
+  .contact-icon,
+  .title-icon {
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--brand-ink);
+  }
+
+  .contact-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--brand) 14%, transparent);
+  }
+
+  .title-icon {
+    vertical-align: -3px;
+    margin-right: 4px;
+  }
+
+  .section-sm {
+    padding-top: 48px;
+  }
+
+  .section-sm h2 {
+    font-size: 1.5rem;
+  }
+
+  .how-to {
+    padding-left: 1.4em;
+    margin: 0 0 1em;
+  }
+
+  .how-to li {
+    margin-bottom: 0.5em;
+  }
+
+  .how-to li::marker {
+    color: var(--brand-ink);
+    font-weight: 800;
+  }
+</style>

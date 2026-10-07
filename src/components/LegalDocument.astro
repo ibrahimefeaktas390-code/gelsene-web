@@ -1,0 +1,60 @@
+---
+// Uygulamadaki legal/[doc].tsx ekranının HTML karşılığı: aynı bloklar, aynı sıra, aynı metin.
+import { LEGAL_CONTACT_EMAIL, LEGAL_DOCUMENTS, LEGAL_LAST_UPDATED, type LegalDocId } from '../data/legal';
+
+interface Props {
+  doc: LegalDocId;
+}
+
+const document = LEGAL_DOCUMENTS[Astro.props.doc];
+
+/** Metni parçalara böler; iletişim e-postası mailto bağlantısına dönüşür (uygulamadaki LegalText gibi). */
+const splitEmail = (text: string) => text.split(LEGAL_CONTACT_EMAIL);
+---
+
+<article class="container prose">
+  <header class="page-head">
+    <h1>{document.title}</h1>
+    <p class="meta-line">Son güncelleme: {LEGAL_LAST_UPDATED}</p>
+  </header>
+
+  {
+    document.blocks.map((block) => {
+      if (block.type === 'heading') return <h2>{block.text}</h2>;
+
+      if (block.type === 'paragraph') {
+        const parts = splitEmail(block.text);
+        return (
+          <p>
+            {parts.map((part, index) => (
+              <>
+                {part}
+                {index < parts.length - 1 && <a href={`mailto:${LEGAL_CONTACT_EMAIL}`}>{LEGAL_CONTACT_EMAIL}</a>}
+              </>
+            ))}
+          </p>
+        );
+      }
+
+      return (
+        <ul>
+          {block.items.map((item) => {
+            const text = typeof item === 'string' ? item : item.text;
+            const parts = splitEmail(text);
+            return (
+              <li>
+                {typeof item !== 'string' && <strong>{item.label}: </strong>}
+                {parts.map((part, index) => (
+                  <>
+                    {part}
+                    {index < parts.length - 1 && <a href={`mailto:${LEGAL_CONTACT_EMAIL}`}>{LEGAL_CONTACT_EMAIL}</a>}
+                  </>
+                ))}
+              </li>
+            );
+          })}
+        </ul>
+      );
+    })
+  }
+</article>

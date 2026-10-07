@@ -1,0 +1,26 @@
+---
+import LegalDocument from '../components/LegalDocument.astro';
+import Base from '../layouts/Base.astro';
+import { trDateToIso } from '../data/dates';
+import { LEGAL_DOCUMENTS } from '../data/legal';
+import { LEGAL_UPDATED, SITE, absoluteUrl } from '../data/site';
+
+const path = '/gizlilik';
+const title = `${LEGAL_DOCUMENTS.privacy.title} (KVKK Aydınlatma Metni) | Gelsene`;
+const description =
+  'Gelsene Gizlilik Politikası ve KVKK Aydınlatma Metni: hangi kişisel verilerin hangi amaçla işlendiği, kimlerle paylaşıldığı, ne kadar saklandığı ve KVKK 11. madde kapsamındaki hakların.';
+
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: LEGAL_DOCUMENTS.privacy.title,
+  url: absoluteUrl(path),
+  inLanguage: 'tr-TR',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  dateModified: trDateToIso(LEGAL_UPDATED),
+};
+---
+
+<Base title={title} description={description} path={path} jsonLd={[webPage]} ogType="article">
+  <LegalDocument doc="privacy" />
+</Base>

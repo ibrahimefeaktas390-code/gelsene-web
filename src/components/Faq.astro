@@ -1,0 +1,24 @@
+---
+import type { Faq } from '../data/content';
+
+interface Props {
+  items: Faq[];
+  /** İlk soru açık başlasın mı. */
+  openFirst?: boolean;
+}
+
+const { items, openFirst = false } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item, index) => (
+      <details open={openFirst && index === 0}>
+        <summary>{item.question}</summary>
+        <div class="faq-answer">
+          <p>{item.answer}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>

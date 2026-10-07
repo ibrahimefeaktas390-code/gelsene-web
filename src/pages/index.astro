@@ -1,0 +1,297 @@
+---
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import StoreBadges from '../components/StoreBadges.astro';
+import Base from '../layouts/Base.astro';
+import { ACTIVITY_TYPES, FEATURES, HOME_FAQ, STEPS } from '../data/content';
+import { SITE, absoluteUrl } from '../data/site';
+
+const title = 'Gelsene — Birlikte yapacak insan bul | Sosyal aktivite uygulaması';
+const description =
+  'Gelsene, ortak ilgi alanlarına sahip insanların birlikte yürüyüş, halı saha, kahve, kitap kulübü gibi sosyal aktiviteler oluşturup katıldığı ücretsiz bir uygulamadır. Yakında App Store ve Google Play’de.';
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  url: absoluteUrl('/'),
+  inLanguage: 'tr-TR',
+  mainEntity: HOME_FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<Base title={title} description={description} path="/" jsonLd={[faqPage]}>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Sosyal aktivite eşleştirme uygulaması</p>
+        <h1 id="hero-title">Yalnız yapmak istemediğin her şey için: <span class="accent">Gelsene!</span></h1>
+        <p class="lead">
+          Gelsene, yapmak istediğin aktivite için ortak ilgi alanlarına sahip insanlarla buluşmanı sağlayan bir
+          uygulamadır. Yürüyüş, halı saha, kahve ya da kitap kulübü — aktiviteni oluştur veya birine katıl, tanış,
+          birlikte zaman geçir.
+        </p>
+        <StoreBadges />
+        <p class="muted small hero-note">Gelsene henüz mağazalarda değil; çok yakında iPhone ve Android’de.</p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-logo">
+          <img src="/logo-512.png" alt="" width="240" height="240" />
+        </div>
+        <ul class="hero-chips">
+          {ACTIVITY_TYPES.slice(0, 6).map((type) => <li>{type.emoji} {type.label}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="nasil-calisir" aria-labelledby="steps-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Nasıl çalışır?</p>
+        <h2 id="steps-title">Üç adımda plandan buluşmaya</h2>
+      </div>
+      <ol class="steps grid grid-3">
+        {
+          STEPS.map((step, index) => (
+            <li class="card step">
+              <span class="step-number" aria-hidden="true">{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="ozellikler" aria-labelledby="features-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Öne çıkanlar</p>
+        <h2 id="features-title">Tanışmayı kolaylaştıran, seni güvende tutan özellikler</h2>
+      </div>
+      <ul class="grid grid-4 features">
+        {
+          FEATURES.map((feature) => (
+            <li class="card feature">
+              <span class="feature-icon">
+                <Icon name={feature.icon} />
+              </span>
+              <h3>{feature.title}</h3>
+              <p>{feature.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="aktiviteler" aria-labelledby="types-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Ne yapmak istersin?</p>
+        <h2 id="types-title">{ACTIVITY_TYPES.length} aktivite türü, tek uygulama</h2>
+        <p class="muted">Spordan kültüre, doğadan oyuna: aktiviteni oluştururken türünü seçersin, başkaları da Keşfet’te türe göre filtreleyerek seni bulur.</p>
+      </div>
+      <ul class="type-list">
+        {ACTIVITY_TYPES.map((type) => <li><span aria-hidden="true">{type.emoji}</span> {type.label}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="sss" aria-labelledby="faq-title">
+    <div class="container narrow">
+      <div class="section-head">
+        <p class="eyebrow">Sık sorulan sorular</p>
+        <h2 id="faq-title">Merak ettiklerin</h2>
+      </div>
+      <Faq items={HOME_FAQ} openFirst />
+      <p class="muted faq-more">
+        Başka bir sorun mu var? <a href="/destek">Destek sayfasına</a> göz at ya da bize yaz.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta card">
+        <h2 id="cta-title">Bir sonraki planın için yanında kimse yok mu? {SITE.name}!</h2>
+        <p>Gelsene çok yakında App Store ve Google Play’de. O zamana kadar sorularını bize iletebilirsin.</p>
+        <div class="cta-actions">
+          <a class="button" href="/destek">Bize ulaş</a>
+          <a class="button button-ghost" href="/gizlilik">Verilerini nasıl koruyoruz?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: 40px 24px;
+    background:
+      radial-gradient(60rem 30rem at 85% 10%, color-mix(in srgb, var(--brand) 16%, transparent), transparent 70%),
+      var(--bg);
+  }
+
+  .hero-inner {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      padding-block: 72px 56px;
+    }
+    .hero-inner {
+      grid-template-columns: 1.3fr 1fr;
+    }
+  }
+
+  .accent {
+    color: var(--brand-ink);
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    max-width: 38em;
+    margin-bottom: 28px;
+  }
+
+  .hero-note {
+    margin-top: 12px;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 24px 0;
+  }
+
+  .hero-logo {
+    width: min(260px, 70vw);
+    aspect-ratio: 1;
+    border-radius: 32%;
+    overflow: hidden;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    box-shadow: var(--shadow), 0 30px 80px color-mix(in srgb, var(--brand) 30%, transparent);
+  }
+
+  .hero-logo img {
+    width: 82%;
+    height: auto;
+  }
+
+  .hero-chips {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 360px;
+  }
+
+  .hero-chips li,
+  .type-list li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .section-tint {
+    background: var(--surface-2);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .section-tint {
+      background: #15181e;
+    }
+  }
+
+  .steps,
+  .features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .step {
+    position: relative;
+  }
+
+  .step-number {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--brand);
+    color: var(--on-brand);
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+
+  .step p,
+  .feature p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .feature-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--brand) 14%, transparent);
+    color: var(--brand-ink);
+    margin-bottom: 14px;
+  }
+
+  .type-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .faq-more {
+    margin-top: 20px;
+  }
+
+  .cta {
+    text-align: center;
+    padding: 40px 24px;
+    background:
+      radial-gradient(40rem 20rem at 50% 0%, color-mix(in srgb, var(--brand) 18%, transparent), transparent 70%),
+      var(--surface);
+  }
+
+  .cta p {
+    max-width: 36em;
+    margin-inline: auto;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+</style>

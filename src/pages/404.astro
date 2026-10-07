@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Sayfa bulunamadı | Gelsene"
+  description="Aradığın sayfa Gelsene sitesinde bulunamadı. Ana sayfaya veya destek sayfasına dönebilirsin."
+  path="/404"
+  noindex
+>
+  <section class="container narrow not-found" aria-labelledby="nf-title">
+    <p class="code" aria-hidden="true">404</p>
+    <h1 id="nf-title">Bu sayfa buluşmaya gelmedi</h1>
+    <p class="muted">Aradığın sayfa taşınmış ya da hiç var olmamış olabilir. Seni doğru yere götürelim:</p>
+    <div class="actions">
+      <a class="button" href="/">Ana sayfaya dön</a>
+      <a class="button button-ghost" href="/destek">Destek</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding-block: 72px 24px;
+  }
+
+  .code {
+    font-size: clamp(4rem, 18vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+    margin: 0 0 12px;
+    color: var(--brand);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+</style>
