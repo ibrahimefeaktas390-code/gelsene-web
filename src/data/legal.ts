@@ -16,7 +16,7 @@ export type LegalDocument = {
   blocks: LegalBlock[];
 };
 
-export const LEGAL_CONTACT_EMAIL = 'gelseneuygulama@gmail.com';
+export const LEGAL_CONTACT_EMAIL = 'destek@gelseneapp.com';
 export const LEGAL_LAST_UPDATED = '6 Ekim 2026';
 
 export const LEGAL_DOCUMENTS: Record<LegalDocId, LegalDocument> = {
