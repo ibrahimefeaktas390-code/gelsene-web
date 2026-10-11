@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gelsene-web",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    // Astro'nun statik çıktısı. /a/* dışındaki her istek doğrudan buradan servis edilir.
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/a/*"]
+  },
+  // Herkese açık değerler (uygulamada da EXPO_PUBLIC_ olarak gömülü). anon/publishable anahtar;
+  // service_role anahtarı buraya ASLA yazılmaz.
+  "vars": {
+    "SUPABASE_URL": "https://gqvoisrjcpkseymuuwxg.supabase.co",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdxdm9pc3JqY3Brc2V5bXV1d3hnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0NjMxMTAsImV4cCI6MjEwNTAzOTExMH0.gKP6ZOMG586rfDQvpwB8K1O1oOOzM9c8EeNil6fcxDY"
+  }
+}

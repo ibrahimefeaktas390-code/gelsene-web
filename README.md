@@ -54,9 +54,23 @@ Pages gibi uygulama reposunun olmadığı ortamlarda kontrol atlanır ve commit'
 powershell -ExecutionPolicy Bypass -File scripts/make-images.ps1
 ```
 
-## Deploy (Cloudflare Pages)
+## Paylaşılan aktivite sayfası (`/a/<aktivite-id>`)
+
+Cloudflare Worker (`src/worker.ts`) yalnızca `/a/*` isteklerini karşılar (`wrangler.jsonc` →
+`assets.run_worker_first`); diğer her şey `dist/` içinden statik servis edilir.
+
+- Aktivite, Supabase'deki `get_public_activity` RPC'sinden **anon** anahtarla okunur. URL ve anon
+  anahtar `wrangler.jsonc` → `vars` içindedir (uygulamadaki `EXPO_PUBLIC_` değerleriyle aynı,
+  herkese açık değerler). `service_role` anahtarı burada asla kullanılmaz.
+- HTML `src/activity-page.ts`'te üretilir; kullanıcı girdileri (başlık, açıklama, konum) her zaman
+  `escapeHtml`'den geçer. Testler: `npm run test:worker`.
+- Sayfalar `noindex, nofollow`, `robots.txt`'te `Disallow: /a/`; sitemap'te yer almaz.
+- Yerelde denemek için: `npm run build && npx wrangler dev`
+
+## Deploy (Cloudflare Workers)
 
 - Build komutu: `npm run build`
-- Çıktı klasörü: `dist`
-- `public/_headers` güvenlik başlıklarını ve `/_astro/*` için uzun önbelleği tanımlar.
-- `dist/404.html` Cloudflare Pages tarafından otomatik olarak 404 sayfası kullanılır.
+- Deploy komutu: `npx wrangler deploy` (ayarlar `wrangler.jsonc`'de; Worker adı `gelsene-web`)
+- `public/_headers` statik dosyalara güvenlik başlıklarını ve `/_astro/*` için uzun önbelleği
+  ekler. Worker yanıtlarına uygulanmadığı için aynı başlıklar `src/worker.ts`'te de verilir.
+- Bulunamayan statik yollar `dist/404.html` ile yanıtlanır (`not_found_handling: "404-page"`).

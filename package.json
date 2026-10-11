@@ -3,18 +3,23 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "gelseneapp.com — Gelsene uygulamasının statik tanıtım sitesi",
+  "description": "gelseneapp.com: Gelsene uygulamasının tanıtım sitesi ve paylaşılan aktivite sayfaları",
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/sync-legal.mjs --check && astro build",
     "preview": "astro preview",
     "sync:legal": "node scripts/sync-legal.mjs",
-    "check:legal": "node scripts/sync-legal.mjs --check"
+    "check:legal": "node scripts/sync-legal.mjs --check",
+    "test:worker": "node scripts/test-activity-page.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "engines": {
     "node": ">=20"
   },
   "dependencies": {
     "astro": "^7.3.6"
+  },
+  "devDependencies": {
+    "wrangler": "^4.149.0"
   }
 }
