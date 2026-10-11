@@ -6,9 +6,9 @@ import Base from '../layouts/Base.astro';
 import { ACTIVITY_TYPES, FEATURES, HOME_FAQ, STEPS } from '../data/content';
 import { SITE, absoluteUrl } from '../data/site';
 
-const title = 'Gelsene — Birlikte yapacak insan bul | Sosyal aktivite uygulaması';
+const title = 'Gelsene | Birlikte yapacak insan bul';
 const description =
-  'Gelsene, ortak ilgi alanlarına sahip insanların birlikte yürüyüş, halı saha, kahve, kitap kulübü gibi sosyal aktiviteler oluşturup katıldığı ücretsiz bir uygulamadır. Yakında App Store ve Google Play’de.';
+  'Gelsene, yürüyüş, halı saha, kahve, kitap kulübü gibi aktiviteler açıp başkalarının aktivitelerine katılabildiğin ücretsiz bir uygulama. Yakında App Store ve Google Play\'de.';
 
 const faqPage = {
   '@context': 'https://schema.org',
@@ -27,12 +27,10 @@ const faqPage = {
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
       <div class="hero-text">
-        <p class="eyebrow">Sosyal aktivite eşleştirme uygulaması</p>
+        <p class="eyebrow">Aktivite uygulaması</p>
         <h1 id="hero-title">Yalnız yapmak istemediğin her şey için: <span class="accent">Gelsene!</span></h1>
         <p class="lead">
-          Gelsene, yapmak istediğin aktivite için ortak ilgi alanlarına sahip insanlarla buluşmanı sağlayan bir
-          uygulamadır. Yürüyüş, halı saha, kahve ya da kitap kulübü — aktiviteni oluştur veya birine katıl, tanış,
-          birlikte zaman geçir.
+          Gelsene, yapmak istediğin şeyi birlikte yapabileceğin insanlarla buluşturur. Yürüyüş, halı saha, kahve ya da kitap kulübü. Aktivite aç veya birine katıl, tanış, birlikte vakit geçir.
         </p>
         <StoreBadges />
         <p class="muted small hero-note">Gelsene henüz mağazalarda değil; çok yakında iPhone ve Android’de.</p>
@@ -72,7 +70,7 @@ const faqPage = {
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Öne çıkanlar</p>
-        <h2 id="features-title">Tanışmayı kolaylaştıran, seni güvende tutan özellikler</h2>
+        <h2 id="features-title">Tanışmayı kolaylaştıran, rahat hissettiren özellikler</h2>
       </div>
       <ul class="grid grid-4 features">
         {
@@ -94,8 +92,8 @@ const faqPage = {
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Ne yapmak istersin?</p>
-        <h2 id="types-title">{ACTIVITY_TYPES.length} aktivite türü, tek uygulama</h2>
-        <p class="muted">Spordan kültüre, doğadan oyuna: aktiviteni oluştururken türünü seçersin, başkaları da Keşfet’te türe göre filtreleyerek seni bulur.</p>
+        <h2 id="types-title">Birçok aktivite türü, tek uygulama</h2>
+        <p class="muted">Spordan kültüre, doğadan oyuna. Aktivite açarken türünü seçersin, başkaları da türe göre filtreleyip seni bulur.</p>
       </div>
       <ul class="type-list">
         {ACTIVITY_TYPES.map((type) => <li><span aria-hidden="true">{type.emoji}</span> {type.label}</li>)}

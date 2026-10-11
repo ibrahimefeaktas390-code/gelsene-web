@@ -7,11 +7,11 @@ export type Faq = { question: string; answer: string };
 export const STEPS = [
   {
     title: 'Profilini oluştur',
-    text: 'İlgi alanlarını, genelde ne zaman müsait olduğunu, nasıl bir grup ve tempo sevdiğini seç. Gelsene sana uygun aktiviteleri bunlara göre sıralar.',
+    text: 'İlgi alanlarını, müsait olduğun zamanları, nasıl bir grup ve tempo sevdiğini seç. İlgi alanın, tercih ettiğin grup büyüklüğü ve tempo, Keşfet\'te sana uygun aktiviteleri öne çıkarır.',
   },
   {
     title: 'Aktivite bul ya da kendin aç',
-    text: 'Keşfet’te türe, konuma ve tarihe göre ara. Aradığını bulamazsan birkaç dokunuşla kendi aktiviteni oluştur: ne zaman, nerede, kaç kişi, kimlerle.',
+    text: 'Keşfet\'te aktivite türüne, tarihe ve konum adına göre arayabilirsin. Aradığını bulamazsan birkaç dokunuşla kendi aktiviteni aç: ne zaman, nerede, kaç kişi, kimlerle.',
   },
   {
     title: 'Katıl, sohbet et, buluş',
@@ -23,7 +23,7 @@ export const FEATURES = [
   {
     icon: 'sparkles',
     title: 'Sana uygun öneriler',
-    text: 'İlgi alanların, aktivitenin ne kadar yakında olduğu, tercih ettiğin enerji seviyesi, grup büyüklüğü ve yaşın birlikte değerlendirilerek aktiviteler sana göre sıralanır.',
+    text: 'Keşfet\'te aktiviteler ilgi alanına, tarihine ne kadar az kaldığına, tercih ettiğin tempo ve grup büyüklüğüne ve yaşına göre sıralanır.',
   },
   {
     icon: 'sliders',
@@ -88,7 +88,7 @@ export const HOME_FAQ: Faq[] = [
   {
     question: 'Gelsene nedir?',
     answer:
-      'Gelsene, ortak ilgi alanlarına sahip insanların birlikte sosyal aktiviteler oluşturup bu aktivitelere katıldığı bir sosyal aktivite eşleştirme uygulamasıdır. Yürüyüş, halı saha, kitap kulübü ya da kahve gibi yalnız yapmak istemediğin bir aktiviteyi oluşturursun veya başkasının aktivitesine katılırsın; aktivitenin grup sohbetinde tanışıp buluşursunuz.',
+      'Gelsene, yalnız yapmak istemediğin şeyler için birlikte yapacak insan bulmanı sağlayan bir uygulama. Yürüyüş, halı saha, kitap kulübü ya da kahve gibi bir aktivite açarsın veya başkasının aktivitesine katılırsın. Aktivitenin grup sohbetinde tanışıp buluşursunuz.',
   },
   {
     question: 'Gelsene ücretsiz mi?',
@@ -103,12 +103,12 @@ export const HOME_FAQ: Faq[] = [
   {
     question: 'Gelsene’ye kimler katılabilir?',
     answer:
-      'Gelsene’yi 18 yaşını doldurmuş herkes kullanabilir. Kayıt olurken Gizlilik Politikası’nı ve Kullanım Şartları’nı kabul etmen ve 18 yaşından büyük olduğunu beyan etmen gerekir.',
+      'Gelsene\'yi 18 yaşını doldurmuş herkes kullanabilir. Kayıt olurken Gizlilik Politikası\'nı ve Kullanım Şartları\'nı kabul etmen gerekir. Kabul ederek 18 yaşından büyük olduğunu da beyan etmiş olursun.',
   },
   {
     question: 'Verilerim nasıl kullanılıyor?',
     answer:
-      'Gelsene, kişisel verilerini 6698 sayılı KVKK kapsamında; hesabını yönetmek, aktivite eşleştirme ve öneri hizmetini sunmak, kullanıcılar arası iletişimi sağlamak ve uygulamayı güvende tutmak için işler. Verilerin pazarlama amacıyla üçüncü taraflarla paylaşılmaz veya satılmaz; yalnızca altyapı sağlayıcılarıyla (Supabase, Expo/Firebase) hizmetin gerektirdiği ölçüde paylaşılır. Hesabını dilediğin an uygulamadaki “Hesabı Sil” adımıyla silebilirsin. Bu sitede de takip veya analitik aracı kullanılmaz.',
+      'Gelsene, kişisel verilerini 6698 sayılı KVKK kapsamında; hesabını yönetmek, aktivite önerilerini sunmak, kullanıcılar arası iletişimi sağlamak ve uygulamayı güvende tutmak için işler. Verilerin pazarlama amacıyla üçüncü taraflarla paylaşılmaz veya satılmaz; yalnızca altyapı sağlayıcılarıyla (Supabase, Expo/Firebase) hizmetin gerektirdiği ölçüde paylaşılır. Hesabını dilediğin an uygulamadaki “Hesabı Sil” adımıyla silebilirsin. Bu sitede de takip veya analitik aracı kullanılmaz.',
   },
   {
     question: 'Gelsene’yi nereden indirebilirim?',

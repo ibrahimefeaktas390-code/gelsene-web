@@ -15,7 +15,7 @@ export const SITE = {
   ogImageAlt: 'Gelsene logosu, “Yapmak istediğin aktiviteye eşlik edecek insanları bul.” sloganı ve gelseneapp.com adresi',
   tagline: 'Yapmak istediğin aktiviteye eşlik edecek insanları bul.',
   description:
-    'Gelsene, ortak ilgi alanlarına sahip insanların birlikte sosyal aktiviteler oluşturup katıldığı bir sosyal aktivite eşleştirme uygulamasıdır.',
+    'Gelsene, yalnız yapmak istemediğin şeyler için birlikte yapacak insan bulmanı sağlayan ücretsiz bir aktivite uygulamasıdır.',
 } as const;
 
 export const NAV = [
@@ -29,7 +29,7 @@ export const NAV = [
 export const PAGES = [
   {
     path: '/',
-    title: 'Gelsene — Birlikte yapacak insan bul',
+    title: 'Gelsene | Birlikte yapacak insan bul',
     summary: 'Gelsene nedir, nasıl çalışır, öne çıkan özellikler ve sık sorulan sorular.',
   },
   {
