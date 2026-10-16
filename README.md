@@ -15,13 +15,26 @@ npm run preview    # dist/ çıktısını yerelde sunar
 | Yol                  | Kaynak                               |
 | -------------------- | ------------------------------------ |
 | `/`                  | `src/pages/index.astro`              |
+| `/nasil-calisir`     | `src/pages/nasil-calisir.astro`      |
+| `/guvenlik`          | `src/pages/guvenlik.astro`           |
+| `/sss`               | `src/pages/sss.astro`                |
 | `/destek`            | `src/pages/destek.astro`             |
 | `/gizlilik`          | `src/pages/gizlilik.astro`           |
 | `/kullanim-sartlari` | `src/pages/kullanim-sartlari.astro`  |
 | `/404`               | `src/pages/404.astro`                |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | `src/pages/*.ts` |
 
-Tanıtım metinleri `src/data/content.ts`, site sabitleri `src/data/site.ts` içinde.
+Tanıtım metinleri ve SSS `src/data/content.ts`, site sabitleri ile her sayfanın title, description ve
+sitemap `lastmod` tarihi `src/data/site.ts` (`PAGES`) içinde. Bir sayfanın metnini değiştirince
+`lastmod`u da güncelle.
+
+Mağaza ve sosyal medya linkleri `src/data/links.ts` içinde ve şimdilik boş. Bir mağaza linki girilince
+"Yakında" rozeti "İndir" butonuna döner, "henüz mağazalarda değil" metinleri kalkar, ana sayfaya
+`MobileApplication` JSON-LD eklenir; sosyal hesaplar `Organization.sameAs`e girer. Puan, yorum sayısı
+gibi alanlar bilerek yoktur.
+
+`npm run check:seo` (build sonrası) her sayfada tek title (≤60) ve description (≤155), canonical,
+tek h1, başlık sırası, geçerli JSON-LD, görsel boyutları ve sitemap içeriğini denetler.
 Sayfaya yazılan her özellik uygulamada gerçekten olmalı — yeni özellik eklerken önce uygulamada
 olduğunu doğrula.
 

@@ -1,0 +1,85 @@
+---
+import Faq from '../components/Faq.astro';
+import Base from '../layouts/Base.astro';
+import { ALL_FAQ, FAQ_GROUPS } from '../data/content';
+import { SITE, absoluteUrl, getPage } from '../data/site';
+
+const page = getPage('/sss');
+
+// Sitedeki tek FAQPage: soruların tamamı burada, ana sayfada yalnızca kısa bir seçki gösterilir.
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  name: page.title,
+  url: absoluteUrl(page.path),
+  inLanguage: 'tr-TR',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  dateModified: page.lastmod,
+  mainEntity: ALL_FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<Base title={page.title} description={page.description} path={page.path} jsonLd={[faqPage]}>
+  <div class="container narrow">
+    <header class="page-head">
+      <h1>Sık sorulan sorular</h1>
+      <p class="lead">
+        Gidelim hakkında en çok sorulanlar: ücret, yaş sınırı, şehirler, güvenlik, şikâyet, hesap silme ve daha fazlası.
+        Aradığın yanıt yoksa <a href="/destek">bize yaz</a>.
+      </p>
+      <nav aria-label="Soru başlıkları">
+        <ul class="toc">
+          {FAQ_GROUPS.map((group) => <li><a href={`#${group.id}`}>{group.title}</a></li>)}
+        </ul>
+      </nav>
+    </header>
+
+    {
+      FAQ_GROUPS.map((group, index) => (
+        <section class="group" id={group.id} aria-labelledby={`${group.id}-title`}>
+          <h2 id={`${group.id}-title`}>{group.title}</h2>
+          <Faq items={group.items} openFirst={index === 0} />
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+    color: var(--muted);
+  }
+
+  .toc {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .toc a {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .group {
+    padding-top: 40px;
+  }
+
+  .group h2 {
+    font-size: 1.5rem;
+  }
+</style>

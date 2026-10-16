@@ -1,13 +1,10 @@
 ---
-import Faq from '../components/Faq.astro';
 import Icon from '../components/Icon.astro';
 import Base from '../layouts/Base.astro';
-import { SUPPORT_FAQ, contactMailto } from '../data/content';
-import { CONTACT_EMAIL, SITE, absoluteUrl } from '../data/site';
+import { contactMailto } from '../data/content';
+import { CONTACT_EMAIL, SITE, absoluteUrl, getPage } from '../data/site';
 
-const path = '/destek';
-const title = 'Destek ve İletişim | Gidelim';
-const description = `Gidelim destek sayfası: ${CONTACT_EMAIL} adresinden bize ulaş, sık sorulan soruların yanıtlarını bul, hesabını nasıl sileceğini ve KVKK kapsamında veri talebini nasıl ileteceğini öğren.`;
+const { path, title, description } = getPage('/destek');
 
 const contactPage = {
   '@context': 'https://schema.org',
@@ -86,7 +83,11 @@ const contactPage = {
 
     <section class="section-sm" id="sss" aria-labelledby="support-faq-title">
       <h2 id="support-faq-title">Sık sorulanlar</h2>
-      <Faq items={SUPPORT_FAQ} />
+      <p>
+        Şifre sıfırlama, hesap doğrulama, şikâyet, bildirimler ve aktiviteden ayrılma gibi soruların yanıtları
+        <a href="/sss">Sık sorulan sorular</a> sayfasında. Güvenlik özellikleri için <a href="/guvenlik">Güvenlik</a>
+        sayfasına göz atabilirsin.
+      </p>
     </section>
   </div>
 </Base>

@@ -1,6 +1,9 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 import '../styles/global.css';
-import { CONTACT_EMAIL, NAV, SITE, absoluteUrl } from '../data/site';
+import { SOCIAL_LINKS } from '../data/links';
+import { CONTACT_EMAIL, FOOTER_NAV, HEADER_NAV, SITE, absoluteUrl } from '../data/site';
 
 interface Props {
   /** <title> içeriği; marka adı eklenmez, sayfada tam haliyle verilir. */
@@ -24,7 +27,12 @@ const organization = {
   '@id': `${SITE.url}/#organization`,
   name: SITE.name,
   url: `${SITE.url}/`,
-  logo: absoluteUrl('/logo-512.png'),
+  logo: {
+    '@type': 'ImageObject',
+    url: absoluteUrl('/logo-512.png'),
+    width: 512,
+    height: 512,
+  },
   email: CONTACT_EMAIL,
   description: SITE.description,
   contactPoint: {
@@ -33,6 +41,7 @@ const organization = {
     email: CONTACT_EMAIL,
     availableLanguage: ['tr'],
   },
+  ...(SOCIAL_LINKS.length > 0 && { sameAs: SOCIAL_LINKS }),
 };
 
 const website = {
@@ -57,8 +66,7 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
 
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#FFF8F3" media="(prefers-color-scheme: light)" />
@@ -95,13 +103,13 @@ const year = new Date().getFullYear();
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/" aria-label="Gidelim ana sayfa">
-          <img src="/logo-192.png" alt="" width="36" height="36" />
+          <Image src={logo} alt="" width={36} height={36} densities={[1, 2]} loading="eager" />
           <span>Gidelim</span>
         </a>
         <nav aria-label="Ana menü">
           <ul class="nav-list">
             {
-              NAV.filter((item) => item.href !== '/').map((item) => (
+              HEADER_NAV.map((item) => (
                 <li>
                   <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
                     {item.label}
@@ -127,7 +135,7 @@ const year = new Date().getFullYear();
         <nav aria-label="Alt menü">
           <ul class="footer-links">
             {
-              NAV.map((item) => (
+              FOOTER_NAV.map((item) => (
                 <li>
                   <a href={item.href}>{item.label}</a>
                 </li>

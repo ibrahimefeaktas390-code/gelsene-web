@@ -1,20 +1,27 @@
 ---
-// Uygulama henüz mağazalarda değil: bilerek bağlantı yok. Yayına çıkınca <a> ile değiştir.
-const stores = [
-  { name: 'App Store', platform: 'iPhone için' },
-  { name: 'Google Play', platform: 'Android için' },
-];
+import { STORES } from '../data/links';
+// Linki girilmiş mağaza (src/data/links.ts) indirme butonu olur; girilmemiş olan "Yakında" diye kalır.
 ---
 
 <ul class="stores" aria-label="Uygulama mağazaları">
   {
-    stores.map((store) => (
-      <li class="store">
-        <span class="store-platform">{store.platform}</span>
-        <span class="store-name">{store.name}</span>
-        <span class="store-soon">Yakında</span>
-      </li>
-    ))
+    STORES.map((store) =>
+      store.url ? (
+        <li>
+          <a class="store store-live" href={store.url} rel="noopener">
+            <span class="store-platform">{store.platform}</span>
+            <span class="store-name">{store.name}</span>
+            <span class="store-soon">İndir</span>
+          </a>
+        </li>
+      ) : (
+        <li class="store">
+          <span class="store-platform">{store.platform}</span>
+          <span class="store-name">{store.name}</span>
+          <span class="store-soon">Yakında</span>
+        </li>
+      ),
+    )
   }
 </ul>
 
@@ -38,6 +45,18 @@ const stores = [
     border-radius: 14px;
     border: 2px dashed var(--border);
     background: var(--surface);
+  }
+
+  .store-live {
+    border-style: solid;
+    border-color: var(--brand);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .store-live .store-soon {
+    background: var(--brand);
+    color: var(--on-brand);
   }
 
   .store-platform {

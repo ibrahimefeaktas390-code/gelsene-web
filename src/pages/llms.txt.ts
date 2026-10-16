@@ -1,19 +1,30 @@
 import type { APIRoute } from 'astro';
-import { FEATURES, HOME_FAQ } from '../data/content';
+import { ALL_FAQ, FEATURES } from '../data/content';
+import { IS_LIVE, LIVE_STORES, SOCIAL_LINKS } from '../data/links';
 import { CONTACT_EMAIL, PAGES, SITE, absoluteUrl } from '../data/site';
 
 // https://llmstxt.org biçimi: başlık, kısa özet (blockquote), ayrıntılar ve bağlantı listesi.
 export const GET: APIRoute = () => {
+  const availability = IS_LIVE
+    ? `Uygulama ${LIVE_STORES.map((store) => store.name).join(' ve ')} üzerinden ücretsiz indirilebilir.`
+    : "Uygulama henüz uygulama mağazalarında yayında değildir (App Store ve Google Play'e yakında gelecek).";
   const pages = PAGES.map((page) => `- [${page.title}](${absoluteUrl(page.path)}): ${page.summary}`).join('\n');
   const features = FEATURES.map((feature) => `- **${feature.title}:** ${feature.text}`).join('\n');
-  const faq = HOME_FAQ.map((item) => `### ${item.question}\n\n${item.answer}`).join('\n\n');
+  const faq = ALL_FAQ.map((item) => `### ${item.question}\n\n${item.answer}`).join('\n\n');
+  const links = [
+    `- Web sitesi: ${SITE.url}`,
+    `- İletişim: ${CONTACT_EMAIL}`,
+    ...LIVE_STORES.map((store) => `- ${store.name}: ${store.url}`),
+    ...SOCIAL_LINKS.map((url) => `- ${url}`),
+  ].join('\n');
 
   const body = `# ${SITE.name}
 
-> ${SITE.description} Uygulama Türkçedir, 18 yaş ve üzeri kullanıcılar içindir ve henüz uygulama mağazalarında yayında değildir (App Store ve Google Play'e yakında gelecek).
+> ${SITE.description} Kullanıcılar yürüyüş, halı saha, kahve, kitap kulübü gibi bir aktivite açar ya da başkasının aktivitesine katılım isteği gönderir; onaylanınca aktivitenin grup sohbetinde tanışıp buluşurlar.
 
-- Web sitesi: ${SITE.url}
-- İletişim: ${CONTACT_EMAIL}
+Gidelim Türkçe bir mobil uygulamadır, 18 yaşını doldurmuş kişilere açıktır ve belirli bir şehirle sınırlı değildir (aktivitenin konumunu açan kişi yazar). Uygulamada abonelik ya da uygulama içi satın alma yoktur. ${availability}
+
+${links}
 
 ## Sayfalar
 

@@ -3,12 +3,9 @@ import LegalDocument from '../components/LegalDocument.astro';
 import Base from '../layouts/Base.astro';
 import { trDateToIso } from '../data/dates';
 import { LEGAL_DOCUMENTS } from '../data/legal';
-import { LEGAL_UPDATED, SITE, absoluteUrl } from '../data/site';
+import { LEGAL_UPDATED, SITE, absoluteUrl, getPage } from '../data/site';
 
-const path = '/gizlilik';
-const title = `${LEGAL_DOCUMENTS.privacy.title} (KVKK Aydınlatma Metni) | Gidelim`;
-const description =
-  'Gidelim Gizlilik Politikası ve KVKK Aydınlatma Metni: hangi kişisel verilerin hangi amaçla işlendiği, kimlerle paylaşıldığı, ne kadar saklandığı ve KVKK 11. madde kapsamındaki hakların.';
+const { path, title, description } = getPage('/gizlilik');
 
 const webPage = {
   '@context': 'https://schema.org',

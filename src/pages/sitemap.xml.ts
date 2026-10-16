@@ -1,14 +1,11 @@
 import type { APIRoute } from 'astro';
-import { trDateToIso } from '../data/dates';
-import { LEGAL_UPDATED, PAGES, absoluteUrl } from '../data/site';
+import { PAGES, absoluteUrl } from '../data/site';
 
-const LEGAL_PATHS = new Set(['/gizlilik', '/kullanim-sartlari']);
-
+// Yalnızca indekslenecek sayfalar (PAGES). 404 ve /a/<id> aktivite sayfaları bilerek yok.
 export const GET: APIRoute = () => {
-  const legalLastmod = trDateToIso(LEGAL_UPDATED);
-  const urls = PAGES.map(({ path }) => {
-    const lastmod = LEGAL_PATHS.has(path) && legalLastmod ? `\n    <lastmod>${legalLastmod}</lastmod>` : '';
-    return `  <url>\n    <loc>${absoluteUrl(path)}</loc>${lastmod}\n  </url>`;
+  const urls = PAGES.map(({ path, lastmod }) => {
+    const lastmodTag = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : '';
+    return `  <url>\n    <loc>${absoluteUrl(path)}</loc>${lastmodTag}\n  </url>`;
   }).join('\n');
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>

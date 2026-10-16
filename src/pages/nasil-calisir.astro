@@ -1,0 +1,176 @@
+---
+import Base from '../layouts/Base.astro';
+import { ACTIVITY_TYPES } from '../data/content';
+import { SITE, absoluteUrl, getPage } from '../data/site';
+
+const page = getPage('/nasil-calisir');
+
+const steps = [
+  {
+    id: 'profil',
+    name: 'Profilini oluştur',
+    text: 'E-posta adresinle kayıt ol, ilgi alanlarını, müsait olduğun zamanları, tercih ettiğin grup büyüklüğünü ve tempoyu seç.',
+  },
+  {
+    id: 'kesfet',
+    name: 'Keşfet’te aktivite bul',
+    text: 'Aktiviteleri başlığa ya da konum adına göre ara; aktivite türüne, konuma ve tarihe göre filtrele.',
+  },
+  {
+    id: 'aktivite-ac',
+    name: 'Ya da kendi aktiviteni aç',
+    text: 'Başlık, tür, açıklama, tarih ve saat, süre, konum, kişi sayısı, yaş aralığı, ücret, tempo ve katılımcı tercihini yazarak aktiviteni yayınla.',
+  },
+  {
+    id: 'katil',
+    name: 'Katılım isteği gönder',
+    text: 'Organizatör isteğini onaylayınca ya da aktivitede otomatik onay açıksa hemen aktivitenin grup sohbetine katılırsın.',
+  },
+  {
+    id: 'bulus',
+    name: 'Sohbet et ve buluş',
+    text: 'Grup sohbetinde ayrıntıları konuş; aktiviteden 24 saat ve 2 saat önce hatırlatma bildirimi alırsın.',
+  },
+];
+
+const howTo = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Gidelim ile birlikte aktivite yapacak insan bulmak',
+  description: page.description,
+  inLanguage: 'tr-TR',
+  url: absoluteUrl(page.path),
+  step: steps.map((step, index) => ({
+    '@type': 'HowToStep',
+    position: index + 1,
+    name: step.name,
+    text: step.text,
+    url: `${absoluteUrl(page.path)}#${step.id}`,
+  })),
+};
+
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: page.title,
+  url: absoluteUrl(page.path),
+  inLanguage: 'tr-TR',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  dateModified: page.lastmod,
+};
+---
+
+<Base title={page.title} description={page.description} path={page.path} jsonLd={[webPage, howTo]}>
+  <article class="container prose">
+    <header class="page-head">
+      <h1>Gidelim nasıl çalışır?</h1>
+      <p class="lead">
+        Gidelim’de bir aktivite açarsın ya da başkasının açtığı aktiviteye katılım isteği gönderirsin; onaylanınca
+        aktivitenin grup sohbetinde tanışır, belirlenen yer ve saatte buluşursunuz. Uygulamayı kullanmak ücretsizdir ve
+        18 yaşını doldurmuş herkese açıktır.
+      </p>
+    </header>
+
+    <p>
+      Örneğin cumartesi sabahı Moda’da sahil yürüyüşü yapmak istiyorsun ama gelecek kimse yok. Keşfet’te “Moda” diye
+      arayıp o gün açılmış yürüyüşlere bakarsın; uygun bir şey yoksa kendi yürüyüşünü açar, katılmak isteyenleri
+      onaylarsın. Aşağıda her adımı ayrıntısıyla anlattık.
+    </p>
+
+    <h2 id="profil">1. Profilini oluştur</h2>
+    <p>
+      E-posta adresinle kayıt olursun. Ardından ilgi alanlarını, müsait olduğun zamanları, nasıl bir grup büyüklüğü
+      ve tempo sevdiğini seçersin. İlgi alanın, tercih ettiğin grup büyüklüğü ve tempo, Keşfet’te sana uygun
+      aktiviteleri öne çıkarır. İstersen hesabını selfie ile doğrulayıp isminin yanına doğrulanmış hesap rozeti
+      alabilirsin (<a href="/guvenlik#dogrulama">nasıl çalıştığını oku</a>).
+    </p>
+
+    <h2 id="kesfet">2. Keşfet’te aktivite bul</h2>
+    <p>
+      Keşfet ekranında yaklaşan aktiviteleri görürsün. Aktiviteler ilgi alanına, tarihine ne kadar az kaldığına,
+      tercih ettiğin tempo ve grup büyüklüğüne ve yaşına göre sıralanır. Arama kutusuyla başlığa ya da konum adına göre
+      arayabilir, filtrelerle aktivite türünü, konumu ve tarihi daraltabilirsin.
+    </p>
+    <p>
+      Henüz hesabın yoksa uygulamayı açtığında “Aktivitelere göz at” ile yaklaşan aktivitelerin başlığını, türünü,
+      zamanını, konum adını ve kalan yer sayısını görebilirsin. Katılmak, aktivite açmak ve sohbet etmek için hesap
+      gerekir.
+    </p>
+
+    <h2 id="aktivite-ac">3. Ya da kendi aktiviteni aç</h2>
+    <p>Aradığını bulamazsan birkaç dokunuşla kendi aktiviteni açarsın. Bir aktivitede şunları belirlersin:</p>
+    <ul>
+      <li>Başlık, aktivite türü ve kısa bir açıklama</li>
+      <li>Tarih, saat ve süre</li>
+      <li>Konum adı (ör. “Maçka Parkı”) ve istersen açık adres</li>
+      <li>Kaç kişi olacağınız ve istersen yaş aralığı</li>
+      <li>Ücretli mi ücretsiz mi; ücretliyse tutarı (₺). Ödeme uygulama üzerinden alınmaz.</li>
+      <li>Enerji seviyesi: sakin, orta tempo ya da yüksek enerji</li>
+      <li>Katılımcı tercihi: karma, sadece kadın ya da sadece erkek</li>
+      <li>Katılım isteklerini tek tek mi onaylayacağın, yoksa herkesin anında katılabileceği mi</li>
+    </ul>
+    <p>Aktivite türleri şunlardır:</p>
+    <ul class="type-list" role="list">
+      {ACTIVITY_TYPES.map((type) => <li><span aria-hidden="true">{type.emoji}</span> {type.label}</li>)}
+    </ul>
+
+    <h2 id="katil">4. Katılım isteği gönder</h2>
+    <p>
+      Bir aktiviteye katılmak istediğinde katılım isteği gönderirsin. Organizatör isteğini onaylayınca aktivitenin
+      grup sohbetine eklenirsin; aktivitede otomatik onay açıksa anında katılırsın. Organizatör gerekirse bir
+      katılımcıyı çıkarabilir ya da aktiviteyi iptal edebilir. Fikrini değiştirirsen aktiviteden kendin de
+      ayrılabilirsin.
+    </p>
+
+    <h2 id="bulus">5. Sohbet et ve buluş</h2>
+    <p>
+      Her aktivitenin kendi grup sohbeti vardır. Katılımcılarla yazışır, fotoğraf ve sesli mesaj gönderirsin;
+      mesajlarını düzenleyebilir ya da silebilir, sohbeti sessize alabilirsin. Katıldığın ya da düzenlediğin
+      aktiviteden 24 saat ve 2 saat önce hatırlatma bildirimi gelir.
+    </p>
+    <p>
+      Aktiviteden sonra birlikte katıldığın kişiler bağlantıların arasında listelenir; tekrar görüşmek istediklerini
+      favorilerine ekleyebilirsin.
+    </p>
+
+    <h2 id="paylas">Aktiviteyi arkadaşlarınla paylaş</h2>
+    <p>
+      Paylaş düğmesi, aktivite için gidelim.app/a/ ile başlayan bir bağlantı oluşturur. Bağlantıyı açan kişi
+      aktivitenin başlığını, türünü, zamanını, konum adını, açıklamanın başını ve kalan yer sayısını görür; adres,
+      organizatör ve katılımcı bilgileri bu sayfada gösterilmez.
+    </p>
+
+    <p class="next">
+      Sorun mu var? <a href="/sss">Sık sorulan sorulara</a> göz at ya da <a href="/destek">bize yaz</a>.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+  }
+
+  .type-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .type-list li {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .next {
+    margin-top: 2.5em;
+    font-weight: 600;
+  }
+</style>

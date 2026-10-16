@@ -3,12 +3,9 @@ import LegalDocument from '../components/LegalDocument.astro';
 import Base from '../layouts/Base.astro';
 import { trDateToIso } from '../data/dates';
 import { LEGAL_DOCUMENTS } from '../data/legal';
-import { LEGAL_UPDATED, SITE, absoluteUrl } from '../data/site';
+import { LEGAL_UPDATED, SITE, absoluteUrl, getPage } from '../data/site';
 
-const path = '/kullanim-sartlari';
-const title = `${LEGAL_DOCUMENTS.terms.title} | Gidelim`;
-const description =
-  'Gidelim Kullanım Şartları: hizmetin tanımı, 18 yaş sınırı, hesap ve kimlik doğrulama, yasaklı davranışlar, içerik moderasyonu ve hesabın sonlandırılması.';
+const { path, title, description } = getPage('/kullanim-sartlari');
 
 const webPage = {
   '@context': 'https://schema.org',

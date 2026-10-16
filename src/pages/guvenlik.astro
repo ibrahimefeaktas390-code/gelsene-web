@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import { contactMailto } from '../data/content';
+import { CONTACT_EMAIL, SITE, absoluteUrl, getPage } from '../data/site';
+
+const page = getPage('/guvenlik');
+
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: page.title,
+  url: absoluteUrl(page.path),
+  inLanguage: 'tr-TR',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  about: { '@id': `${SITE.url}/#organization` },
+  dateModified: page.lastmod,
+};
+---
+
+<Base title={page.title} description={page.description} path={page.path} jsonLd={[webPage]}>
+  <article class="container prose">
+    <header class="page-head">
+      <h1>Gidelim’de güvenlik ve doğrulama</h1>
+      <p class="lead">
+        Gidelim’de hesabını selfie ile doğrulayabilir, rahatsız olduğun kişileri engelleyebilir, kullanıcıları ve
+        aktiviteleri şikâyet edebilirsin. Şikâyetler Gidelim ekibi tarafından incelenir. Uygulama yalnızca 18 yaşını
+        doldurmuş kişilere açıktır.
+      </p>
+    </header>
+
+    <h2 id="dogrulama">Selfie ile hesap doğrulama</h2>
+    <p>
+      Ayarlar → Hesabını Doğrula’dan ön kamerayla bir selfie çekip gönderirsin. Selfie, açık rızan alınarak yalnızca
+      kimlik doğrulama amacıyla incelenir; erişimi kısıtlı bir alanda saklanır, profilinde gösterilmez ve inceleme
+      sonuçlandığında (onay ya da red) silinir. Onaylanırsa isminin yanında doğrulanmış hesap rozeti görünür; doğrulanmış
+      kullanıcıları da bu rozetten tanırsın.
+    </p>
+
+    <h2 id="sikayet">Engelleme ve şikâyet</h2>
+    <ul>
+      <li>
+        <strong>Kullanıcıyı şikâyet et:</strong> Kullanıcının profilinde “Şikayet Et”e dokun ve nedenini seç: uygunsuz
+        davranış, spam/sahte aktivite, taciz veya diğer.
+      </li>
+      <li><strong>Aktiviteyi şikâyet et:</strong> Aktivitenin detayında “Aktiviteyi Şikayet Et”e dokun.</li>
+      <li>
+        <strong>Engelle:</strong> Profildeki “Engelle” ile kişiyi engellersin; engellediğin kişilerin aktivitelerini
+        görmezsin. Engeli Ayarlar → Engellenen Kullanıcılar’dan kaldırabilirsin.
+      </li>
+    </ul>
+    <p>
+      Şikâyetler Gidelim ekibi tarafından incelenir. Kullanım Şartları’na ya da yürürlükteki mevzuata aykırı bulunan
+      içerik kaldırılabilir, ilgili hesap kısıtlanabilir veya kapatılabilir (<a href="/kullanim-sartlari"
+        >Kullanım Şartları</a
+      >, madde 6). Uygulama içinden bildiremediğin bir güvenlik sorununu da <a href={contactMailto('Güvenlik bildirimi')}
+        >{CONTACT_EMAIL}</a
+      > adresine yazabilirsin.
+    </p>
+
+    <h2 id="kimlerle">Kimlerle buluşacağını baştan bil</h2>
+    <ul>
+      <li>
+        Her aktivitede yaş aralığı ve katılımcı tercihi (karma, sadece kadın, sadece erkek) baştan yazar; sana uygun
+        olmayan aktiviteye katılmak zorunda değilsin.
+      </li>
+      <li>
+        Kendi aktiviteni açtıysan katılım isteklerini tek tek onaylayabilir, gerekirse bir katılımcıyı çıkarabilir ya
+        da aktiviteyi iptal edebilirsin.
+      </li>
+      <li>Katıldığın aktiviteden istediğin an ayrılabilirsin.</li>
+    </ul>
+
+    <h2 id="gizlilik">Bilgilerin kimlere görünür?</h2>
+    <ul>
+      <li>
+        Paylaşılan aktivite bağlantılarında (gidelim.app/a/…) ve hesap açmadan göz atanlara adres, organizatör ve
+        katılımcı bilgileri gösterilmez; yalnızca başlık, tür, zaman, konum adı, açıklamanın başı ve kalan yer sayısı
+        görünür.
+      </li>
+      <li>
+        Ayarlar → Aktiviteler’deki “Aktivitelerimi profilimde göster” anahtarını kapatırsan, başkaları profilinde
+        oluşturduğun ve katıldığın aktiviteleri göremez.
+      </li>
+      <li>
+        Kişisel verilerin 6698 sayılı KVKK kapsamında işlenir ve pazarlama amacıyla satılmaz. Ayrıntılar
+        <a href="/gizlilik">Gizlilik Politikası</a>’nda. Hesabını dilediğin an uygulamadan silebilirsin
+        (<a href="/destek#hesap-silme">nasıl silinir?</a>).
+      </li>
+    </ul>
+
+    <h2 id="oneriler">Güvenli buluşma için önerilerimiz</h2>
+    <p>Bunlar uygulamanın bir özelliği değil, ilk kez tanışacağın insanlarla buluşurken işine yarayacak hatırlatmalar:</p>
+    <ul>
+      <li>İlk buluşmayı kalabalık, herkese açık bir yerde yap: bir park, sahil, kafe ya da spor sahası.</li>
+      <li>Nereye, kimlerle ve ne zaman gittiğini bir yakınına haber ver.</li>
+      <li>Ulaşımını kendin planla; dönüşün için başkasına bağlı kalma.</li>
+      <li>Sohbette para, şifre ya da kimlik bilgisi isteyen olursa paylaşma ve şikâyet et.</li>
+      <li>Kendini rahatsız hissedersen buluşmadan ayrıl; yaşadığını uygulamadan şikâyet et.</li>
+      <li>Acil bir durumda 112’yi ara.</li>
+    </ul>
+
+    <p class="next">
+      Başka soruların için <a href="/sss#guvenlik">güvenlikle ilgili sık sorulan sorulara</a> bakabilirsin.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+  }
+
+  .next {
+    margin-top: 2.5em;
+    font-weight: 600;
+  }
+</style>

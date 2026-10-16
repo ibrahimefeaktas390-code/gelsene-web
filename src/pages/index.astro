@@ -1,45 +1,61 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 import Faq from '../components/Faq.astro';
 import Icon from '../components/Icon.astro';
 import StoreBadges from '../components/StoreBadges.astro';
 import Base from '../layouts/Base.astro';
-import { ACTIVITY_TYPES, FEATURES, HOME_FAQ, STEPS } from '../data/content';
-import { SITE, absoluteUrl } from '../data/site';
+import { ACTIVITY_TYPES, AUDIENCES, FEATURES, HOME_FAQ, STEPS } from '../data/content';
+import { IS_LIVE, LIVE_STORES, liveStoreNames } from '../data/links';
+import { SITE, absoluteUrl, getPage } from '../data/site';
 
-const title = 'Gidelim | Birlikte yapacak insan bul';
-const description =
-  'Gidelim, yürüyüş, halı saha, kahve, kitap kulübü gibi aktiviteler açıp başkalarının aktivitelerine katılabildiğin ücretsiz bir uygulama. Yakında App Store ve Google Play\'de.';
+const page = getPage('/');
 
-const faqPage = {
+// Mağaza linki girilmeden uygulama şeması eklenmez (bkz. src/data/links.ts). Puan, yorum sayısı
+// gibi alanlar bilerek yok; fiyat 0 çünkü uygulamada abonelik ya da uygulama içi satın alma yok.
+const mobileApplication = {
   '@context': 'https://schema.org',
-  '@type': 'FAQPage',
+  '@type': 'MobileApplication',
+  name: SITE.name,
+  description: SITE.description,
   url: absoluteUrl('/'),
   inLanguage: 'tr-TR',
-  mainEntity: HOME_FAQ.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
+  applicationCategory: 'SocialNetworkingApplication',
+  operatingSystem: LIVE_STORES.map((store) => store.os).join(', '),
+  downloadUrl: LIVE_STORES.map((store) => store.url),
+  image: absoluteUrl('/logo-512.png'),
+  publisher: { '@id': `${SITE.url}/#organization` },
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'TRY' },
 };
 ---
 
-<Base title={title} description={description} path="/" jsonLd={[faqPage]}>
+<Base title={page.title} description={page.description} path="/" jsonLd={IS_LIVE ? [mobileApplication] : []}>
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
       <div class="hero-text">
         <p class="eyebrow">Aktivite uygulaması</p>
         <h1 id="hero-title">Yalnız yapmak istemediğin her şey için: <span class="accent">Gidelim!</span></h1>
         <p class="lead">
-          Gidelim, yapmak istediğin şeyi birlikte yapabileceğin insanlarla buluşturur. Yürüyüş, halı saha, kahve ya da kitap kulübü. Aktivite aç veya birine katıl, tanış, birlikte vakit geçir.
+          Gidelim, yürüyüş, halı saha, kahve ya da kitap kulübü gibi aktiviteleri birlikte yapacak insan bulmanı
+          sağlayan ücretsiz bir mobil uygulamadır. Aktivite aç veya birine katıl, grup sohbetinde tanış, birlikte vakit
+          geçir.
         </p>
         <StoreBadges />
-        <p class="muted small hero-note">Gidelim henüz mağazalarda değil; çok yakında iPhone ve Android’de.</p>
+        {!IS_LIVE && <p class="muted small hero-note">Gidelim henüz mağazalarda değil; çok yakında iPhone ve Android’de.</p>}
       </div>
-      <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual">
         <div class="hero-logo">
-          <img src="/logo-512.png" alt="" width="240" height="240" />
+          <Image
+            src={logo}
+            alt="Gidelim uygulama simgesi: turuncu konuşma balonunun içinde beyaz G harfi"
+            width={240}
+            height={240}
+            densities={[1, 2]}
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
-        <ul class="hero-chips">
+        <ul class="hero-chips" aria-hidden="true">
           {ACTIVITY_TYPES.slice(0, 6).map((type) => <li>{type.emoji} {type.label}</li>)}
         </ul>
       </div>
@@ -63,10 +79,31 @@ const faqPage = {
           ))
         }
       </ol>
+      <p class="section-more"><a href="/nasil-calisir">Gidelim’in nasıl çalıştığını adım adım oku</a></p>
     </div>
   </section>
 
-  <section class="section section-tint" id="ozellikler" aria-labelledby="features-title">
+  <section class="section section-tint" id="kimler-icin" aria-labelledby="audience-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Kimler için?</p>
+        <h2 id="audience-title">Planı olan ama yanında kimse olmayan herkes için</h2>
+        <p class="muted">Gidelim 18 yaşını doldurmuş herkese açık. Özellikle şu durumlarda işine yarar:</p>
+      </div>
+      <ul class="grid grid-2 audiences">
+        {
+          AUDIENCES.map((item) => (
+            <li class="card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="ozellikler" aria-labelledby="features-title">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Öne çıkanlar</p>
@@ -85,10 +122,11 @@ const faqPage = {
           ))
         }
       </ul>
+      <p class="section-more"><a href="/guvenlik">Güvenlik ve hesap doğrulama hakkında daha fazlası</a></p>
     </div>
   </section>
 
-  <section class="section" id="aktiviteler" aria-labelledby="types-title">
+  <section class="section section-tint" id="aktiviteler" aria-labelledby="types-title">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Ne yapmak istersin?</p>
@@ -101,7 +139,7 @@ const faqPage = {
     </div>
   </section>
 
-  <section class="section section-tint" id="sss" aria-labelledby="faq-title">
+  <section class="section" id="sss" aria-labelledby="faq-title">
     <div class="container narrow">
       <div class="section-head">
         <p class="eyebrow">Sık sorulan sorular</p>
@@ -109,7 +147,8 @@ const faqPage = {
       </div>
       <Faq items={HOME_FAQ} openFirst />
       <p class="muted faq-more">
-        Başka bir sorun mu var? <a href="/destek">Destek sayfasına</a> göz at ya da bize yaz.
+        Hesap silme, şikâyet, bildirimler ve daha fazlası için <a href="/sss">tüm sık sorulan sorulara</a> göz at ya da
+        <a href="/destek">bize yaz</a>.
       </p>
     </div>
   </section>
@@ -118,7 +157,13 @@ const faqPage = {
     <div class="container">
       <div class="cta card">
         <h2 id="cta-title">Bir sonraki planın için yanında kimse yok mu? {SITE.name}!</h2>
-        <p>Gidelim çok yakında App Store ve Google Play’de. O zamana kadar sorularını bize iletebilirsin.</p>
+        {
+          IS_LIVE ? (
+            <p>Gidelim {liveStoreNames('de')} ücretsiz. İndir, ilk aktiviteni aç ya da birine katıl.</p>
+          ) : (
+            <p>Gidelim çok yakında App Store ve Google Play’de. O zamana kadar sorularını bize iletebilirsin.</p>
+          )
+        }
         <div class="cta-actions">
           <a class="button" href="/destek">Bize ulaş</a>
           <a class="button button-ghost" href="/gizlilik">Verilerini nasıl koruyoruz?</a>
@@ -266,6 +311,22 @@ const faqPage = {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+  }
+
+  .section-more {
+    margin: 24px 0 0;
+    font-weight: 700;
+  }
+
+  .audiences {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .audiences p {
+    margin: 0;
+    color: var(--muted);
   }
 
   .faq-more {
