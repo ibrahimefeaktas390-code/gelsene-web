@@ -86,34 +86,34 @@ export const ACTIVITY_TYPES = [
 
 export const HOME_FAQ: Faq[] = [
   {
-    question: 'Gelsene nedir?',
+    question: 'Gidelim nedir?',
     answer:
-      'Gelsene, yalnız yapmak istemediğin şeyler için birlikte yapacak insan bulmanı sağlayan bir uygulama. Yürüyüş, halı saha, kitap kulübü ya da kahve gibi bir aktivite açarsın veya başkasının aktivitesine katılırsın. Aktivitenin grup sohbetinde tanışıp buluşursunuz.',
+      'Gidelim, yalnız yapmak istemediğin şeyler için birlikte yapacak insan bulmanı sağlayan bir uygulama. Yürüyüş, halı saha, kitap kulübü ya da kahve gibi bir aktivite açarsın veya başkasının aktivitesine katılırsın. Aktivitenin grup sohbetinde tanışıp buluşursunuz.',
   },
   {
-    question: 'Gelsene ücretsiz mi?',
+    question: 'Gidelim ücretsiz mi?',
     answer:
-      'Evet. Gelsene’yi kullanmak ücretsizdir; uygulamada abonelik veya uygulama içi satın alma yoktur. Bazı aktiviteler, organizatörün belirttiği bir katılım ücretine sahip olabilir; bu durumda ücret aktivitenin bilgilerinde açıkça yazar ve uygulama üzerinden ödeme alınmaz.',
+      'Evet. Gidelim’i kullanmak ücretsizdir; uygulamada abonelik veya uygulama içi satın alma yoktur. Bazı aktiviteler, organizatörün belirttiği bir katılım ücretine sahip olabilir; bu durumda ücret aktivitenin bilgilerinde açıkça yazar ve uygulama üzerinden ödeme alınmaz.',
   },
   {
-    question: 'Gelsene güvenli mi, hesap doğrulama nasıl yapılıyor?',
+    question: 'Gidelim güvenli mi, hesap doğrulama nasıl yapılıyor?',
     answer:
-      'Gelsene’de hesabını selfie ile doğrulayabilirsin: ön kamerayla çektiğin selfie, açık rızan alınarak yalnızca doğrulama amacıyla incelenir ve inceleme bitince silinir. Onaylanan hesapların isminin yanında doğrulanmış hesap rozeti görünür. Ayrıca kullanıcıları engelleyebilir, kullanıcıları ve aktiviteleri şikâyet edebilirsin; aktivitenin katılımcı tercihi (karma, sadece kadın, sadece erkek) ve yaş aralığı da baştan belirtilir.',
+      'Gidelim’de hesabını selfie ile doğrulayabilirsin: ön kamerayla çektiğin selfie, açık rızan alınarak yalnızca doğrulama amacıyla incelenir ve inceleme bitince silinir. Onaylanan hesapların isminin yanında doğrulanmış hesap rozeti görünür. Ayrıca kullanıcıları engelleyebilir, kullanıcıları ve aktiviteleri şikâyet edebilirsin; aktivitenin katılımcı tercihi (karma, sadece kadın, sadece erkek) ve yaş aralığı da baştan belirtilir.',
   },
   {
-    question: 'Gelsene’ye kimler katılabilir?',
+    question: 'Gidelim’e kimler katılabilir?',
     answer:
-      'Gelsene\'yi 18 yaşını doldurmuş herkes kullanabilir. Kayıt olurken Gizlilik Politikası\'nı ve Kullanım Şartları\'nı kabul etmen gerekir. Kabul ederek 18 yaşından büyük olduğunu da beyan etmiş olursun.',
+      'Gidelim\'i 18 yaşını doldurmuş herkes kullanabilir. Kayıt olurken Gizlilik Politikası\'nı ve Kullanım Şartları\'nı kabul etmen gerekir. Kabul ederek 18 yaşından büyük olduğunu da beyan etmiş olursun.',
   },
   {
     question: 'Verilerim nasıl kullanılıyor?',
     answer:
-      'Gelsene, kişisel verilerini 6698 sayılı KVKK kapsamında; hesabını yönetmek, aktivite önerilerini sunmak, kullanıcılar arası iletişimi sağlamak ve uygulamayı güvende tutmak için işler. Verilerin pazarlama amacıyla üçüncü taraflarla paylaşılmaz veya satılmaz; yalnızca altyapı sağlayıcılarıyla (Supabase, Expo/Firebase) hizmetin gerektirdiği ölçüde paylaşılır. Hesabını dilediğin an uygulamadaki “Hesabı Sil” adımıyla silebilirsin. Bu sitede de takip veya analitik aracı kullanılmaz.',
+      'Gidelim, kişisel verilerini 6698 sayılı KVKK kapsamında; hesabını yönetmek, aktivite önerilerini sunmak, kullanıcılar arası iletişimi sağlamak ve uygulamayı güvende tutmak için işler. Verilerin pazarlama amacıyla üçüncü taraflarla paylaşılmaz veya satılmaz; yalnızca altyapı sağlayıcılarıyla (Supabase, Expo/Firebase) hizmetin gerektirdiği ölçüde paylaşılır. Hesabını dilediğin an uygulamadaki “Hesabı Sil” adımıyla silebilirsin. Bu sitede de takip veya analitik aracı kullanılmaz.',
   },
   {
-    question: 'Gelsene’yi nereden indirebilirim?',
+    question: 'Gidelim’i nereden indirebilirim?',
     answer:
-      'Gelsene henüz uygulama mağazalarında yayında değil; App Store ve Google Play’e yakında geliyor. Yayına çıktığında indirme bağlantıları bu sayfada olacak.',
+      'Gidelim henüz uygulama mağazalarında yayında değil; App Store ve Google Play’e yakında geliyor. Yayına çıktığında indirme bağlantıları bu sayfada olacak.',
   },
 ];
 

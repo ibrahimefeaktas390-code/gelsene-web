@@ -74,9 +74,9 @@ $link = New-Object System.Drawing.SolidBrush ([System.Drawing.ColorTranslator]::
 $titleFont = New-Object System.Drawing.Font 'Segoe UI', 92, ([System.Drawing.FontStyle]::Bold), ([System.Drawing.GraphicsUnit]::Pixel)
 $tagFont = New-Object System.Drawing.Font 'Segoe UI', 42, ([System.Drawing.FontStyle]::Regular), ([System.Drawing.GraphicsUnit]::Pixel)
 $urlFont = New-Object System.Drawing.Font 'Segoe UI', 34, ([System.Drawing.FontStyle]::Bold), ([System.Drawing.GraphicsUnit]::Pixel)
-$g.DrawString('Gelsene', $titleFont, $ink, 470, 150)
+$g.DrawString('Gidelim', $titleFont, $ink, 470, 150)
 $g.DrawString("Yapmak istediğin aktiviteye`neşlik edecek insanları bul.", $tagFont, $muted, (New-Object System.Drawing.RectangleF 474, 285, 700, 140))
-$g.DrawString('gelseneapp.com', $urlFont, $link, 474, 440)
+$g.DrawString('gidelim.app', $urlFont, $link, 474, 440)
 $bmp.Save((Join-Path $public 'og-image.png'), [System.Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose(); $bmp.Dispose(); $icon.Dispose()
 

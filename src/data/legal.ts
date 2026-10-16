@@ -16,8 +16,8 @@ export type LegalDocument = {
   blocks: LegalBlock[];
 };
 
-export const LEGAL_CONTACT_EMAIL = 'destek@gelseneapp.com';
-export const LEGAL_LAST_UPDATED = '6 Ekim 2026';
+export const LEGAL_CONTACT_EMAIL = 'destek@gidelim.app';
+export const LEGAL_LAST_UPDATED = '14 Ekim 2026';
 
 export const LEGAL_DOCUMENTS: Record<LegalDocId, LegalDocument> = {
   privacy: {
@@ -27,10 +27,10 @@ export const LEGAL_DOCUMENTS: Record<LegalDocId, LegalDocument> = {
       { type: 'heading', text: '1. Veri Sorumlusu' },
       {
         type: 'paragraph',
-        text: `Gelsene mobil uygulaması ("Uygulama", "Gelsene"), 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında veri sorumlusu sıfatıyla işletilmektedir. Kişisel verilerinizle ilgili sorularınız için ${LEGAL_CONTACT_EMAIL} adresinden bize ulaşabilirsiniz.`,
+        text: `Gidelim mobil uygulaması ("Uygulama", "Gidelim"), 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında veri sorumlusu sıfatıyla işletilmektedir. Kişisel verilerinizle ilgili sorularınız için ${LEGAL_CONTACT_EMAIL} adresinden bize ulaşabilirsiniz.`,
       },
       { type: 'heading', text: '2. İşlenen Kişisel Veriler' },
-      { type: 'paragraph', text: "Gelsene'yi kullanırken aşağıdaki kişisel verileriniz işlenebilir:" },
+      { type: 'paragraph', text: "Gidelim'i kullanırken aşağıdaki kişisel verileriniz işlenebilir:" },
       {
         type: 'bullets',
         items: [
@@ -76,7 +76,7 @@ export const LEGAL_DOCUMENTS: Record<LegalDocId, LegalDocument> = {
       { type: 'heading', text: '4. Kişisel Verilerin Aktarılması' },
       {
         type: 'paragraph',
-        text: "Verileriniz, Uygulama'nın altyapısını sağlayan hizmet sağlayıcılarla (örneğin Supabase — veritabanı, kimlik doğrulama ve depolama hizmeti; Expo/Firebase — push bildirim altyapısı) hizmetin gerektirdiği ölçüde paylaşılır. Bu sağlayıcılar, verilerinizi yalnızca Gelsene'ye hizmet sunmak amacıyla işler. Verileriniz, yasal zorunluluklar dışında üçüncü taraflarla pazarlama amacıyla paylaşılmaz veya satılmaz.",
+        text: "Verileriniz, Uygulama'nın altyapısını sağlayan hizmet sağlayıcılarla (örneğin Supabase — veritabanı, kimlik doğrulama ve depolama hizmeti; Expo/Firebase — push bildirim altyapısı) hizmetin gerektirdiği ölçüde paylaşılır. Bu sağlayıcılar, verilerinizi yalnızca Gidelim'e hizmet sunmak amacıyla işler. Verileriniz, yasal zorunluluklar dışında üçüncü taraflarla pazarlama amacıyla paylaşılmaz veya satılmaz.",
       },
       { type: 'heading', text: '5. Kişisel Verilerin Saklanma Süresi' },
       {
@@ -114,22 +114,22 @@ export const LEGAL_DOCUMENTS: Record<LegalDocId, LegalDocument> = {
       { type: 'heading', text: '1. Taraflar ve Kabul' },
       {
         type: 'paragraph',
-        text: `Bu Kullanım Şartları ("Şartlar"), Gelsene mobil uygulamasını ("Uygulama") kullanan siz ("Kullanıcı") ile Uygulama'yı işleten Gelsene arasındaki ilişkiyi düzenler. Uygulama'ya kayıt olarak veya kullanarak bu Şartlar'ı ve Gizlilik Politikası'nı kabul etmiş sayılırsınız.`,
+        text: `Bu Kullanım Şartları ("Şartlar"), Gidelim mobil uygulamasını ("Uygulama") kullanan siz ("Kullanıcı") ile Uygulama'yı işleten Gidelim arasındaki ilişkiyi düzenler. Uygulama'ya kayıt olarak veya kullanarak bu Şartlar'ı ve Gizlilik Politikası'nı kabul etmiş sayılırsınız.`,
       },
       { type: 'heading', text: '2. Hizmetin Tanımı' },
       {
         type: 'paragraph',
-        text: 'Gelsene, kullanıcıların ortak ilgi alanlarına dayalı sosyal aktiviteler oluşturabildiği, bu aktivitelere katılabildiği ve diğer katılımcılarla uygulama içi sohbet üzerinden iletişim kurabildiği bir sosyal eşleştirme platformudur.',
+        text: 'Gidelim, kullanıcıların ortak ilgi alanlarına dayalı sosyal aktiviteler oluşturabildiği, bu aktivitelere katılabildiği ve diğer katılımcılarla uygulama içi sohbet üzerinden iletişim kurabildiği bir sosyal eşleştirme platformudur.',
       },
       { type: 'heading', text: '3. Yaş Sınırı' },
       {
         type: 'paragraph',
-        text: "Gelsene'yi kullanmak için 18 yaşını doldurmuş olmanız gerekmektedir. Uygulama'ya kayıt olarak 18 yaşını doldurduğunuzu beyan etmiş olursunuz.",
+        text: "Gidelim'i kullanmak için 18 yaşını doldurmuş olmanız gerekmektedir. Uygulama'ya kayıt olarak 18 yaşını doldurduğunuzu beyan etmiş olursunuz.",
       },
       { type: 'heading', text: '4. Hesap ve Kimlik Doğrulama' },
       {
         type: 'paragraph',
-        text: "Hesabınızın güvenliğinden siz sorumlusunuz. Gelsene, kullanıcı güvenliğini artırmak amacıyla selfie fotoğrafı yoluyla kimlik doğrulama isteğinde bulunabilir; doğrulama süreci Gizlilik Politikası'nda açıklandığı şekilde yürütülür. Gerçeğe aykırı bilgi veya başka bir kişiye ait görsel/kimlik kullanmak hesabın askıya alınmasına veya kapatılmasına neden olabilir.",
+        text: "Hesabınızın güvenliğinden siz sorumlusunuz. Gidelim, kullanıcı güvenliğini artırmak amacıyla selfie fotoğrafı yoluyla kimlik doğrulama isteğinde bulunabilir; doğrulama süreci Gizlilik Politikası'nda açıklandığı şekilde yürütülür. Gerçeğe aykırı bilgi veya başka bir kişiye ait görsel/kimlik kullanmak hesabın askıya alınmasına veya kapatılmasına neden olabilir.",
       },
       { type: 'heading', text: '5. Kullanıcı Sorumlulukları ve Yasaklı Davranışlar' },
       {
@@ -149,17 +149,17 @@ export const LEGAL_DOCUMENTS: Record<LegalDocId, LegalDocument> = {
       { type: 'heading', text: '6. İçerik ve Moderasyon' },
       {
         type: 'paragraph',
-        text: "Paylaştığınız profil bilgileri, mesajlar ve aktivite içerikleri sizin sorumluluğunuzdadır. Gelsene, Uygulama içindeki mevcut şikâyet ve engelleme mekanizmaları aracılığıyla bildirilen içerikleri inceleyebilir; bu Şartlar'a veya yürürlükteki mevzuata aykırı bulduğu içerikleri kaldırma ve ilgili hesabı kısıtlama veya kapatma hakkını saklı tutar.",
+        text: "Paylaştığınız profil bilgileri, mesajlar ve aktivite içerikleri sizin sorumluluğunuzdadır. Gidelim, Uygulama içindeki mevcut şikâyet ve engelleme mekanizmaları aracılığıyla bildirilen içerikleri inceleyebilir; bu Şartlar'a veya yürürlükteki mevzuata aykırı bulduğu içerikleri kaldırma ve ilgili hesabı kısıtlama veya kapatma hakkını saklı tutar.",
       },
       { type: 'heading', text: '7. Fikri Mülkiyet' },
       {
         type: 'paragraph',
-        text: "Uygulama'nın tasarımı, logosu, markası ve yazılımı Gelsene'ye aittir ve ilgili fikri mülkiyet mevzuatı kapsamında korunur. Paylaştığınız içeriklerin (profil fotoğrafı, mesajlar vb.) mülkiyeti size aittir; ancak bu içeriklerin hizmetin sunulması amacıyla Uygulama içinde görüntülenmesine izin verirsiniz.",
+        text: "Uygulama'nın tasarımı, logosu, markası ve yazılımı Gidelim'e aittir ve ilgili fikri mülkiyet mevzuatı kapsamında korunur. Paylaştığınız içeriklerin (profil fotoğrafı, mesajlar vb.) mülkiyeti size aittir; ancak bu içeriklerin hizmetin sunulması amacıyla Uygulama içinde görüntülenmesine izin verirsiniz.",
       },
       { type: 'heading', text: '8. Sorumluluğun Sınırlandırılması' },
       {
         type: 'paragraph',
-        text: 'Gelsene, kullanıcıların birbiriyle gerçekleştirdiği aktivitelerde aracı bir platform konumundadır. Kullanıcılar arası fiziksel buluşmalardan, aktivite sırasında yaşanabilecek anlaşmazlık, kayıp veya zararlardan Gelsene sorumlu tutulamaz. Kullanıcıların birbiriyle buluşurken temkinli olması önerilir.',
+        text: 'Gidelim, kullanıcıların birbiriyle gerçekleştirdiği aktivitelerde aracı bir platform konumundadır. Kullanıcılar arası fiziksel buluşmalardan, aktivite sırasında yaşanabilecek anlaşmazlık, kayıp veya zararlardan Gidelim sorumlu tutulamaz. Kullanıcıların birbiriyle buluşurken temkinli olması önerilir.',
       },
       { type: 'heading', text: '9. Hesabın Sonlandırılması' },
       {

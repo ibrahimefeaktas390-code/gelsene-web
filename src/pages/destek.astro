@@ -6,13 +6,13 @@ import { SUPPORT_FAQ, contactMailto } from '../data/content';
 import { CONTACT_EMAIL, SITE, absoluteUrl } from '../data/site';
 
 const path = '/destek';
-const title = 'Destek ve İletişim | Gelsene';
-const description = `Gelsene destek sayfası: ${CONTACT_EMAIL} adresinden bize ulaş, sık sorulan soruların yanıtlarını bul, hesabını nasıl sileceğini ve KVKK kapsamında veri talebini nasıl ileteceğini öğren.`;
+const title = 'Destek ve İletişim | Gidelim';
+const description = `Gidelim destek sayfası: ${CONTACT_EMAIL} adresinden bize ulaş, sık sorulan soruların yanıtlarını bul, hesabını nasıl sileceğini ve KVKK kapsamında veri talebini nasıl ileteceğini öğren.`;
 
 const contactPage = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
-  name: 'Gelsene Destek',
+  name: 'Gidelim Destek',
   url: absoluteUrl(path),
   inLanguage: 'tr-TR',
   isPartOf: { '@id': `${SITE.url}/#website` },
@@ -33,10 +33,10 @@ const contactPage = {
         <h2 id="contact-title">Bize yaz</h2>
         <p>
           Her türlü soru, öneri ve şikâyetin için e-posta adresimiz:{' '}
-          <a href={contactMailto('Gelsene destek')}><strong>{CONTACT_EMAIL}</strong></a>
+          <a href={contactMailto('Gidelim destek')}><strong>{CONTACT_EMAIL}</strong></a>
         </p>
         <p class="muted small">
-          Hesabınla ilgili taleplerde, Gelsene’ye kayıtlı olduğun e-posta adresinden yazarsan seni daha hızlı doğrulayıp
+          Hesabınla ilgili taleplerde, Gidelim’e kayıtlı olduğun e-posta adresinden yazarsan seni daha hızlı doğrulayıp
           yardımcı olabiliriz. Şifreni asla e-postayla paylaşma; biz de senden istemeyiz.
         </p>
       </div>
@@ -46,7 +46,7 @@ const contactPage = {
       <h2 id="delete-title"><span class="title-icon"><Icon name="trash" /></span> Hesabımı nasıl silerim?</h2>
       <p>Hesabını istediğin an, uygulamanın içinden kendin silebilirsin:</p>
       <ol class="how-to">
-        <li>Gelsene’de <strong>Profil</strong> ekranına git ve sağ üstteki dişli simgesine dokunarak <strong>Ayarlar</strong>’ı aç.</li>
+        <li>Gidelim’de <strong>Profil</strong> ekranına git ve sağ üstteki dişli simgesine dokunarak <strong>Ayarlar</strong>’ı aç.</li>
         <li><strong>Hesap</strong> bölümünün altındaki <strong>Hesabı Sil</strong>’e dokun.</li>
         <li>Açılan uyarıda <strong>Hesabımı Sil</strong>’i seçerek onayla.</li>
       </ol>
@@ -72,7 +72,7 @@ const contactPage = {
       </p>
       <ol class="how-to">
         <li>
-          <a href={contactMailto('KVKK bilgi talebi')}>{CONTACT_EMAIL}</a> adresine, mümkünse Gelsene’ye kayıtlı e-posta
+          <a href={contactMailto('KVKK bilgi talebi')}>{CONTACT_EMAIL}</a> adresine, mümkünse Gidelim’e kayıtlı e-posta
           adresinden yaz.
         </li>
         <li>Konu satırına talebini belirt (ör. “KVKK bilgi talebi”, “Veri düzeltme talebi”).</li>

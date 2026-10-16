@@ -42,8 +42,8 @@ test('kullanıcı girdisi sayfada çalıştırılabilir HTML olarak yer almaz', 
   assert.ok(!html.includes('<script'), '<script> etiketi kalmamalı');
   assert.ok(!html.includes('<img src=x'), 'enjekte edilen <img> kalmamalı');
   assert.ok(!html.includes('onerror=alert(1)>'), 'öznitelikten kaçış olmamalı');
-  assert.ok(html.includes('<title>&lt;script&gt;alert(&quot;başlık&quot;)&lt;/script&gt; | Gelsene</title>'));
-  assert.ok(html.includes('<meta property="og:title" content="&lt;script&gt;alert(&quot;başlık&quot;)&lt;/script&gt; | Gelsene">'));
+  assert.ok(html.includes('<title>&lt;script&gt;alert(&quot;başlık&quot;)&lt;/script&gt; | Gidelim</title>'));
+  assert.ok(html.includes('<meta property="og:title" content="&lt;script&gt;alert(&quot;başlık&quot;)&lt;/script&gt; | Gidelim">'));
   assert.ok(html.includes('&lt;/p&gt;&lt;script&gt;alert(&#39;açıklama&#39;)&lt;/script&gt;'));
   assert.ok(html.includes('&quot;&gt;&lt;img src=x onerror=alert(1)&gt;'));
 });
@@ -69,8 +69,8 @@ test('emoji yalnızca etiket birebir eşleşirse', () => {
 test('meta: robots noindex, canonical, og:description, og:image', () => {
   const html = page.renderActivityPage(evil, []);
   assert.ok(html.includes('<meta name="robots" content="noindex, nofollow">'));
-  assert.ok(html.includes(`<link rel="canonical" href="https://gelseneapp.com/a/${evil.id}">`));
-  assert.ok(html.includes('<meta property="og:image" content="https://gelseneapp.com/og-image.png">'));
+  assert.ok(html.includes(`<link rel="canonical" href="https://gidelim.app/a/${evil.id}">`));
+  assert.ok(html.includes('<meta property="og:image" content="https://gidelim.app/og-image.png">'));
   assert.ok(html.includes('<meta name="twitter:card" content="summary_large_image">'));
   assert.ok(html.includes('content="16 Ekim Cuma, 16:19 - 18:19 · &quot;&gt;&lt;img src=x onerror=alert(1)&gt; · 3 yer kaldı"'));
   assert.ok(!html.includes('application/ld+json'), 'aktivite sayfasında JSON-LD olmamalı');

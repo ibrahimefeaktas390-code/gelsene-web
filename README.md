@@ -1,6 +1,6 @@
-# gelseneapp.com
+# gidelim.app
 
-Gelsene uygulamasının statik tanıtım sitesi. Astro (statik çıktı) + TypeScript; çalışma zamanında
+Gidelim uygulamasının statik tanıtım sitesi. Astro (statik çıktı) + TypeScript; çalışma zamanında
 JavaScript, çerez, takip veya analitik yok.
 
 ```bash

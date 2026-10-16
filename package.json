@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "gelseneapp.com: Gelsene uygulamasının tanıtım sitesi ve paylaşılan aktivite sayfaları",
+  "description": "gidelim.app: Gidelim uygulamasının tanıtım sitesi ve paylaşılan aktivite sayfaları",
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/sync-legal.mjs --check && astro build",

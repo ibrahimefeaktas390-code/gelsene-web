@@ -146,20 +146,20 @@ ${links}
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
-<header class="site-header"><div class="container header-inner"><a class="brand" href="/" aria-label="Gelsene ana sayfa"><img src="/logo-192.png" alt="" width="36" height="36"><span>Gelsene</span></a><nav aria-label="Ana menü"><ul class="nav-list"><li><a href="/destek">Destek</a></li><li><a href="/gizlilik">Gizlilik</a></li><li><a href="/kullanim-sartlari">Kullanım Şartları</a></li></ul></nav></div></header>
+<header class="site-header"><div class="container header-inner"><a class="brand" href="/" aria-label="Gidelim ana sayfa"><img src="/logo-192.png" alt="" width="36" height="36"><span>Gidelim</span></a><nav aria-label="Ana menü"><ul class="nav-list"><li><a href="/destek">Destek</a></li><li><a href="/gizlilik">Gizlilik</a></li><li><a href="/kullanim-sartlari">Kullanım Şartları</a></li></ul></nav></div></header>
 <main id="icerik" tabindex="-1">
 ${body}
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div><p class="footer-brand">Gelsene</p><p class="muted">Birlikte yapacak insan bul.</p></div><p class="muted">İletişim: <a href="mailto:${escapeHtml(CONTACT_EMAIL)}">${escapeHtml(CONTACT_EMAIL)}</a></p><p class="muted small">© ${year} Gelsene. Bu site çerez, takip ya da analitik aracı kullanmaz.</p></div></footer>
+<footer class="site-footer"><div class="container footer-inner"><div><p class="footer-brand">Gidelim</p><p class="muted">Birlikte yapacak insan bul.</p></div><p class="muted">İletişim: <a href="mailto:${escapeHtml(CONTACT_EMAIL)}">${escapeHtml(CONTACT_EMAIL)}</a></p><p class="muted small">© ${year} Gidelim. Bu site çerez, takip ya da analitik aracı kullanmaz.</p></div></footer>
 </body>
 </html>`;
 }
 
 const JOIN_SECTION = `<section class="card join" aria-labelledby="join-title">
-  <h2 id="join-title">Katılmak için Gelsene uygulaması gerekiyor.</h2>
-  <p class="muted">Gelsene çok yakında App Store ve Google Play’de.</p>
+  <h2 id="join-title">Katılmak için Gidelim uygulaması gerekiyor.</h2>
+  <p class="muted">Gidelim çok yakında App Store ve Google Play’de.</p>
   ${STORE_BADGES}
-  <p class="join-links"><a href="/">Gelsene nedir?</a></p>
+  <p class="join-links"><a href="/">Gidelim nedir?</a></p>
 </section>`;
 
 export function renderActivityPage(activity: PublicActivity, stylesheets: string[]): string {
@@ -188,7 +188,7 @@ export function renderActivityPage(activity: PublicActivity, stylesheets: string
 </div>`;
 
   return shell({
-    title: `${title} | Gelsene`,
+    title: `${title} | Gidelim`,
     description: [date, location, spots].filter(Boolean).join(' · '),
     canonical: `${SITE.url}/a/${activity.id}`,
     ogImage: new URL(SITE.ogImage, SITE.url).href,
@@ -208,7 +208,7 @@ export function renderGonePage(stylesheets: string[]): string {
 </div>`;
 
   return shell({
-    title: 'Aktivite bulunamadı | Gelsene',
+    title: 'Aktivite bulunamadı | Gidelim',
     description: 'Bu aktivite artık yok ya da sona erdi.',
     ogImage: new URL(SITE.ogImage, SITE.url).href,
     stylesheets,
@@ -226,7 +226,7 @@ export function renderUnavailablePage(stylesheets: string[]): string {
 </div>`;
 
   return shell({
-    title: 'Aktivite yüklenemedi | Gelsene',
+    title: 'Aktivite yüklenemedi | Gidelim',
     description: 'Aktivite şu an yüklenemedi.',
     ogImage: new URL(SITE.ogImage, SITE.url).href,
     stylesheets,
