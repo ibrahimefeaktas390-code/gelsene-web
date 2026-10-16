@@ -15,14 +15,14 @@ export const GET: APIRoute = () => {
     `- Web sitesi: ${SITE.url}`,
     `- İletişim: ${CONTACT_EMAIL}`,
     ...LIVE_STORES.map((store) => `- ${store.name}: ${store.url}`),
-    ...SOCIAL_LINKS.map((url) => `- ${url}`),
+    ...SOCIAL_LINKS.map((social) => `- ${social.name}: ${social.url}`),
   ].join('\n');
 
   const body = `# ${SITE.name}
 
 > ${SITE.description} Kullanıcılar yürüyüş, halı saha, kahve, kitap kulübü gibi bir aktivite açar ya da başkasının aktivitesine katılım isteği gönderir; onaylanınca aktivitenin grup sohbetinde tanışıp buluşurlar.
 
-Gidelim Türkçe bir mobil uygulamadır, 18 yaşını doldurmuş kişilere açıktır ve belirli bir şehirle sınırlı değildir (aktivitenin konumunu açan kişi yazar). Uygulamada abonelik ya da uygulama içi satın alma yoktur. ${availability}
+Gidelim Türkçe bir mobil uygulamadır, 18 yaşını doldurmuş kişilere açıktır. İstanbul'dan başlıyor ama şehir sınırı yoktur; aktivitenin konumunu onu açan kişi belirler. Uygulamada abonelik ya da uygulama içi satın alma yoktur. ${availability}
 
 ${links}
 

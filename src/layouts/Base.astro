@@ -41,7 +41,7 @@ const organization = {
     email: CONTACT_EMAIL,
     availableLanguage: ['tr'],
   },
-  ...(SOCIAL_LINKS.length > 0 && { sameAs: SOCIAL_LINKS }),
+  ...(SOCIAL_LINKS.length > 0 && { sameAs: SOCIAL_LINKS.map((social) => social.url) }),
 };
 
 const website = {
@@ -145,6 +145,16 @@ const year = new Date().getFullYear();
         </nav>
         <p class="muted">
           İletişim: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          {
+            SOCIAL_LINKS.map((social) => (
+              <>
+                {' · '}
+                <a href={social.url} rel="me noopener">
+                  {social.name}
+                </a>
+              </>
+            ))
+          }
         </p>
         <p class="muted small">
           © {year} Gidelim. Bu site çerez, takip ya da analitik aracı kullanmaz.

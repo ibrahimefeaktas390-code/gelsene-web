@@ -128,7 +128,7 @@ const faq = {
   cities: {
     question: 'Gidelim hangi şehirlerde kullanılabiliyor?',
     answer:
-      'Gidelim belirli bir şehirle sınırlı değil. Aktiviteyi açan kişi buluşma yerinin adını kendisi yazar (ör. “Moda Sahili” ya da “Belgrad Ormanı”); Keşfet’te konum adına göre arayarak İstanbul’da ya da bulunduğun başka bir şehirde açılmış aktiviteleri bulabilirsin. Uygulama Türkçedir ve aktivite ücretleri Türk lirası olarak yazılır.',
+      'Gidelim’e İstanbul’dan başlıyoruz ama uygulamada şehir sınırı yok: aktivitenin nerede olacağını onu açan kişi belirler, buluşma yerinin adını kendisi yazar (ör. “Moda Sahili” ya da “Belgrad Ormanı”). Keşfet’te konum adına göre arayarak İstanbul’da ya da bulunduğun başka bir şehirde açılmış aktiviteleri bulabilirsin. Uygulama Türkçedir ve aktivite ücretleri Türk lirası olarak yazılır.',
   },
   download: {
     question: 'Gidelim’i nereden indirebilirim?',

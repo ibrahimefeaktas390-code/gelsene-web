@@ -7,8 +7,10 @@ export const STORE_LINKS: { appStore: string; googlePlay: string } = {
   googlePlay: '',
 };
 
-/** Gidelim'in gerçekten var olan resmî hesapları (Instagram, X, TikTok, LinkedIn...). Organization.sameAs'e girer. */
-export const SOCIAL_LINKS: string[] = [];
+/** Gidelim'in gerçekten var olan resmî hesapları. Organization.sameAs'e girer, footer'da ve llms.txt'te listelenir. */
+export const SOCIAL_LINKS: { name: string; url: string }[] = [
+  { name: 'Instagram', url: 'https://www.instagram.com/gidelim.app/' },
+];
 
 export const STORES = [
   { key: 'appStore', name: 'App Store', platform: 'iPhone için', os: 'iOS', url: STORE_LINKS.appStore, de: '’da', den: '’dan' },
