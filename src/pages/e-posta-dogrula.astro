@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Kayıt doğrulama e-postasındaki bağlantının açtığı sayfa: /e-posta-dogrula?token_hash=...&type=email
+// İndekslenmez; sitemap ve llms.txt'te yok, robots.txt'te Disallow. Güvenlik başlıkları public/_headers'ta.
+---
+
+<Base
+  title="E-posta doğrulama | Gidelim"
+  description="Gidelim hesabının e-posta adresini doğrulama sayfası. Bu sayfaya doğrulama e-postasındaki bağlantıyla gelinir."
+  path="/e-posta-dogrula"
+  noindex
+>
+  <meta slot="head" name="referrer" content="no-referrer" />
+  <div class="container auth-page">
+    <div class="card auth-card">
+      <h1>E-postanı doğrula</h1>
+
+      <noscript>
+        <p class="auth-alert">
+          Bu sayfa çalışmak için JavaScript gerektirir. Tarayıcında JavaScript’i açıp e-postandaki bağlantıya yeniden
+          dokun.
+        </p>
+      </noscript>
+
+      <div id="invalid" class="auth-alert" role="alert" hidden>
+        <p>Bu bağlantı eksik ya da geçersiz.</p>
+        <p>E-postandaki doğrulama bağlantısını yeniden aç ya da uygulamadan yeniden kayıt olmayı dene.</p>
+      </div>
+
+      <form id="form" class="auth-form" hidden>
+        <p class="muted">Gidelim hesabını kullanmaya başlamak için e-posta adresini doğrula.</p>
+        <p id="error" class="auth-error" role="alert"></p>
+        <button id="submit" class="button" type="submit">E-postamı doğrula</button>
+      </form>
+
+      <div id="done" class="auth-success" role="status" hidden>
+        <p><strong>E-postan doğrulandı.</strong></p>
+        <p>Uygulamaya dönüp giriş yapabilirsin.</p>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { authErrorMessage, setMessage, show, supabase, takeTokenFromUrl } from '../scripts/auth-link';
+
+  const LINK_HINT = 'Uygulamaya dönüp giriş yapmayı dene; e-postan zaten doğrulanmış olabilir.';
+
+  const form = document.getElementById('form') as HTMLFormElement;
+  const submit = document.getElementById('submit') as HTMLButtonElement;
+  const error = document.getElementById('error');
+
+  const { tokenHash, type } = takeTokenFromUrl();
+
+  if (!tokenHash || type !== 'email') {
+    show(document.getElementById('invalid'));
+  } else {
+    show(form);
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!tokenHash || submit.disabled) return;
+
+    setMessage(error, '');
+    submit.disabled = true;
+    submit.textContent = 'Doğrulanıyor…';
+
+    try {
+      const { error: verifyError } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: 'email' });
+      if (verifyError) {
+        setMessage(error, authErrorMessage(verifyError, 'verify', LINK_HINT));
+        return;
+      }
+      // Doğrulama bir oturum açar; site oturum tutmadığı için hemen kapatılır (yalnızca bu tarayıcıdaki oturum).
+      await supabase.auth.signOut({ scope: 'local' }).catch(() => undefined);
+      show(form, false);
+      show(document.getElementById('done'));
+    } catch (unexpected) {
+      setMessage(error, authErrorMessage(unexpected, 'verify', LINK_HINT));
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'E-postamı doğrula';
+    }
+  });
+</script>

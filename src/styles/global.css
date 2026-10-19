@@ -402,3 +402,98 @@ main:focus {
   font-weight: 600;
   margin: 0;
 }
+
+/* Hesap bağlantısı sayfaları (/sifre-yenile, /e-posta-dogrula) */
+.auth-page {
+  max-width: 520px;
+  padding-block: 48px 24px;
+}
+
+.auth-card h1 {
+  font-size: clamp(1.6rem, 5vw, 2rem);
+}
+
+.auth-form {
+  display: grid;
+  gap: 8px;
+}
+
+.auth-form label {
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.auth-form .button {
+  margin-top: 12px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-form .button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.password-field {
+  display: flex;
+  gap: 8px;
+}
+
+.password-field input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+}
+
+.password-field input:focus-visible {
+  border-color: var(--brand);
+}
+
+.toggle {
+  min-height: 48px;
+  min-width: 76px;
+  padding: 0 12px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--brand-ink);
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.auth-error {
+  margin: 4px 0 0;
+  color: #b42318;
+  font-weight: 600;
+}
+
+.auth-error:empty {
+  display: none;
+}
+
+.auth-alert,
+.auth-success {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.auth-alert p,
+.auth-success p {
+  margin: 0.25em 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .auth-error {
+    color: #ff8a80;
+  }
+}

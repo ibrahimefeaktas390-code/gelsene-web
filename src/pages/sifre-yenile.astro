@@ -1,0 +1,159 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Şifre sıfırlama e-postasındaki bağlantının açtığı sayfa: /sifre-yenile?token_hash=...&type=recovery
+// İndekslenmez; sitemap ve llms.txt'te yok, robots.txt'te Disallow. Güvenlik başlıkları public/_headers'ta.
+// Uygulamadaki şifre kuralıyla aynı (gelsene/src/app/login.tsx, settings.tsx: MIN_PASSWORD_LENGTH).
+const MIN_PASSWORD_LENGTH = 6;
+---
+
+<Base
+  title="Yeni şifre belirle | Gidelim"
+  description="Gidelim hesabın için yeni şifre belirleme sayfası. Bu sayfaya şifre sıfırlama e-postasındaki bağlantıyla gelinir."
+  path="/sifre-yenile"
+  noindex
+>
+  <meta slot="head" name="referrer" content="no-referrer" />
+  <div class="container auth-page">
+    <div class="card auth-card">
+      <h1>Yeni şifre belirle</h1>
+
+      <noscript>
+        <p class="auth-alert">
+          Bu sayfa çalışmak için JavaScript gerektirir. Tarayıcında JavaScript’i açıp e-postandaki bağlantıya yeniden
+          dokun.
+        </p>
+      </noscript>
+
+      <div id="invalid" class="auth-alert" role="alert" hidden>
+        <p>Bu bağlantı eksik ya da geçersiz.</p>
+        <p>Uygulamada giriş ekranındaki “Şifremi unuttum”dan yeni bir bağlantı iste.</p>
+      </div>
+
+      <form id="form" class="auth-form" data-min={MIN_PASSWORD_LENGTH} novalidate hidden>
+        <p class="muted">Gidelim hesabın için yeni bir şifre belirle. Şifren en az {MIN_PASSWORD_LENGTH} karakter olmalı.</p>
+
+        <label for="password">Yeni şifre</label>
+        <div class="password-field">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="new-password"
+            minlength={MIN_PASSWORD_LENGTH}
+            required
+            aria-describedby="password-hint"
+          />
+          <button type="button" class="toggle" data-target="password" aria-pressed="false">Göster</button>
+        </div>
+        <p id="password-hint" class="small muted">En az {MIN_PASSWORD_LENGTH} karakter.</p>
+
+        <label for="password-confirm">Yeni şifre (tekrar)</label>
+        <div class="password-field">
+          <input
+            id="password-confirm"
+            name="password-confirm"
+            type="password"
+            autocomplete="new-password"
+            minlength={MIN_PASSWORD_LENGTH}
+            required
+          />
+          <button type="button" class="toggle" data-target="password-confirm" aria-pressed="false">Göster</button>
+        </div>
+
+        <p id="error" class="auth-error" role="alert"></p>
+
+        <button id="submit" class="button" type="submit">Şifremi güncelle</button>
+      </form>
+
+      <div id="done" class="auth-success" role="status" hidden>
+        <p><strong>Şifren güncellendi.</strong></p>
+        <p>Uygulamaya dönüp yeni şifrenle giriş yapabilirsin.</p>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { authErrorMessage, setMessage, show, supabase, takeTokenFromUrl } from '../scripts/auth-link';
+
+  const LINK_HINT = 'Uygulamada “Şifremi unuttum”dan yeni bir bağlantı iste.';
+
+  const form = document.getElementById('form') as HTMLFormElement;
+  const password = document.getElementById('password') as HTMLInputElement;
+  const confirm = document.getElementById('password-confirm') as HTMLInputElement;
+  const submit = document.getElementById('submit') as HTMLButtonElement;
+  const error = document.getElementById('error');
+  const minLength = Number(form.dataset.min);
+
+  const { tokenHash, type } = takeTokenFromUrl();
+  // verifyOtp başarılı olunca token harcanır; updateUser başarısız olursa yeniden doğrulamadan bellekteki
+  // oturumla tekrar denenir.
+  let verified = false;
+
+  if (!tokenHash || type !== 'recovery') {
+    show(document.getElementById('invalid'));
+  } else {
+    show(form);
+  }
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>('.toggle')) {
+    button.addEventListener('click', () => {
+      const input = document.getElementById(button.dataset.target ?? '') as HTMLInputElement;
+      const visible = input.type === 'password';
+      input.type = visible ? 'text' : 'password';
+      button.textContent = visible ? 'Gizle' : 'Göster';
+      button.setAttribute('aria-pressed', String(visible));
+      button.setAttribute('aria-label', visible ? 'Şifreyi gizle' : 'Şifreyi göster');
+    });
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!tokenHash || submit.disabled) return;
+
+    if (password.value.length < minLength) {
+      setMessage(error, `Şifren en az ${minLength} karakter olmalı.`);
+      password.focus();
+      return;
+    }
+    if (password.value !== confirm.value) {
+      setMessage(error, 'Şifreler birbiriyle aynı değil.');
+      confirm.focus();
+      return;
+    }
+
+    setMessage(error, '');
+    submit.disabled = true;
+    submit.textContent = 'Güncelleniyor…';
+
+    try {
+      if (!verified) {
+        const { error: verifyError } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' });
+        if (verifyError) {
+          setMessage(error, authErrorMessage(verifyError, 'verify', LINK_HINT));
+          return;
+        }
+        verified = true;
+      }
+
+      const { error: updateError } = await supabase.auth.updateUser({ password: password.value });
+      if (updateError) {
+        setMessage(error, authErrorMessage(updateError, 'update', LINK_HINT));
+        return;
+      }
+
+      // Varsayılan kapsam (global): sıfırlamadan sonra hesabın diğer cihazlardaki oturumları da kapanır.
+      await supabase.auth.signOut().catch(() => undefined);
+      password.value = '';
+      confirm.value = '';
+      show(form, false);
+      show(document.getElementById('done'));
+    } catch (unexpected) {
+      setMessage(error, authErrorMessage(unexpected, verified ? 'update' : 'verify', LINK_HINT));
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'Şifremi güncelle';
+    }
+  });
+</script>

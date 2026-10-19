@@ -7,3 +7,22 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Şifre sıfırlama ve e-posta doğrulama sayfaları: URL'de tek kullanımlık token var, Referer ile hiçbir yere
+# gitmesin. Tarayıcı kodu Supabase Auth'a bağlandığı için connect-src'ye yalnızca Supabase URL'i eklenir
+# (wrangler.jsonc vars.SUPABASE_URL ile aynı olmalı). "!" ile /* kuralındaki değer kaldırılıp yenisi yazılır.
+/sifre-yenile
+  ! Referrer-Policy
+  ! Content-Security-Policy
+  Referrer-Policy: no-referrer
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self' https://gqvoisrjcpkseymuuwxg.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
+
+/e-posta-dogrula
+  ! Referrer-Policy
+  ! Content-Security-Policy
+  Referrer-Policy: no-referrer
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self' https://gqvoisrjcpkseymuuwxg.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow

@@ -80,6 +80,20 @@ Cloudflare Worker (`src/worker.ts`) yalnızca `/a/*` isteklerini karşılar (`wr
 - Sayfalar `noindex, nofollow`, `robots.txt`'te `Disallow: /a/`; sitemap'te yer almaz.
 - Yerelde denemek için: `npm run build && npx wrangler dev`
 
+## Şifre sıfırlama ve e-posta doğrulama (`/sifre-yenile`, `/e-posta-dogrula`)
+
+Supabase Auth e-postalarındaki bağlantıların açtığı sayfalar. Tarayıcıda `@supabase/supabase-js` ile çalışır;
+Supabase URL'i ve anon anahtarı build'de `wrangler.jsonc` `vars`'tan okunur (bkz. `astro.config.mjs`; anahtar
+anon değilse build durur). `verifyOtp` sayfa açılınca değil butona basınca çağrılır; token adres çubuğundan
+hemen silinir, oturum yalnızca bellekte tutulur. Sayfalar noindex, `robots.txt`'te Disallow, sitemap ve
+`llms.txt`'te yok. `public/_headers` bu iki yolda `Referrer-Policy: no-referrer` verir ve CSP `connect-src`'ye
+yalnızca Supabase URL'ini ekler (URL değişirse orayı da güncelle).
+
+Supabase panelinde (Authentication → Email Templates) bağlantılar şöyle olmalı:
+
+- Reset Password: `https://gidelim.app/sifre-yenile?token_hash={{ .TokenHash }}&type=recovery`
+- Confirm signup: `https://gidelim.app/e-posta-dogrula?token_hash={{ .TokenHash }}&type=email`
+
 ## Deploy (Cloudflare Workers)
 
 - Build komutu: `npm run build`
