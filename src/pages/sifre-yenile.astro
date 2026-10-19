@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 // Şifre sıfırlama e-postasındaki bağlantının açtığı sayfa: /sifre-yenile?token_hash=...&type=recovery
 // İndekslenmez; sitemap ve llms.txt'te yok, robots.txt'te Disallow. Güvenlik başlıkları public/_headers'ta.
 // Uygulamadaki şifre kuralıyla aynı (gelsene/src/app/login.tsx, settings.tsx: MIN_PASSWORD_LENGTH).
-const MIN_PASSWORD_LENGTH = 6;
+const MIN_PASSWORD_LENGTH = 8;
 ---
 
 <Base

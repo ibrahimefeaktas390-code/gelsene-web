@@ -171,7 +171,7 @@ const faq = {
   password: {
     question: 'Şifremi unuttum, ne yapmalıyım?',
     answer:
-      'Uygulamada giriş ekranındaki “Şifremi unuttum”a dokun ve kayıtlı e-posta adresini gir. E-postana gelen bağlantı gidelim.app’te bir sayfa açar; orada yeni şifreni (en az 6 karakter) iki kez yazıp “Şifremi güncelle”ye dokun. Ardından uygulamaya dönüp yeni şifrenle giriş yapabilirsin. Bağlantı tek kullanımlıktır; geçersiz ya da süresi dolmuşsa uygulamadan yeni bir bağlantı iste. Giriş yapmışken şifreni Ayarlar → Şifre Değiştir’den de değiştirebilirsin.',
+      'Uygulamada giriş ekranındaki “Şifremi unuttum”a dokun ve kayıtlı e-posta adresini gir. E-postana gelen bağlantı gidelim.app’te bir sayfa açar; orada yeni şifreni (en az 8 karakter) iki kez yazıp “Şifremi güncelle”ye dokun. Ardından uygulamaya dönüp yeni şifrenle giriş yapabilirsin. Bağlantı tek kullanımlıktır; geçersiz ya da süresi dolmuşsa uygulamadan yeni bir bağlantı iste. Giriş yapmışken şifreni Ayarlar → Şifre Değiştir’den de değiştirebilirsin.',
   },
   notifications: {
     question: 'Bildirimleri nasıl kapatırım?',
