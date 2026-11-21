@@ -34,6 +34,7 @@ export const FOOTER_NAV = [
   { href: '/destek', label: 'Destek' },
   { href: '/gizlilik', label: 'Gizlilik' },
   { href: '/kullanim-sartlari', label: 'Kullanım Şartları' },
+  { href: '/hesap-silme', label: 'Hesap ve veri silme' },
 ] as const;
 
 const legalLastmod = trDateToIso(LEGAL_UPDATED) ?? '';
@@ -97,6 +98,14 @@ export const PAGES = [
       'Gidelim Kullanım Şartları: hizmetin tanımı, 18 yaş sınırı, hesap ve kimlik doğrulama, yasaklı davranışlar, içerik moderasyonu ve hesabın sonlandırılması.',
     summary: 'Hizmetin tanımı, 18 yaş sınırı, kullanıcı sorumlulukları, moderasyon ve hesabın sonlandırılması.',
     lastmod: legalLastmod,
+  },
+  {
+    path: '/hesap-silme',
+    title: 'Hesap ve veri silme | Gidelim',
+    description:
+      'Gidelim hesabını uygulamadan ya da e-postayla nasıl sileceğin, hangi verilerin silindiği ve hangi kayıtların kalabileceği.',
+    summary: 'Uygulama içinden ve e-postayla hesap silme, silinen veriler ve silinmeyebilecek kayıtlar.',
+    lastmod: '2026-11-21',
   },
 ] as const;
 

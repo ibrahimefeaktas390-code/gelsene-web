@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import { contactMailto } from '../data/content';
+import { CONTACT_EMAIL, SITE, absoluteUrl, getPage } from '../data/site';
+
+const { path, title, description, lastmod } = getPage('/hesap-silme');
+
+// Bu listedeki her madde delete-account Edge Function'ı, migration'lardaki "on delete cascade"
+// kuralları ve Supabase'de doğrulanan foreign key'ler (profiles, activities, participants, messages
+// → auth.users; participants, messages → activities) ile doğrulandı. Doğrulanamayan bir maddeyi buraya ekleme.
+const DELETED_DATA = [
+  { label: 'Hesap bilgilerin', text: 'E-posta adresin ve giriş bilgilerin.' },
+  { label: 'Profil bilgilerin', text: 'Adın, takma adın, doğum tarihin, biyografin ve ilgi alanların.' },
+  { label: 'Fotoğrafların', text: 'Profil fotoğrafın ve profiline eklediğin diğer fotoğraflar.' },
+  {
+    label: 'Oluşturduğun aktiviteler',
+    text: 'Açtığın aktiviteler ve bu aktivitelere ait katılım kayıtları ve sohbet mesajları.',
+  },
+  {
+    label: 'Aktivite fotoğrafların',
+    text: 'Oluşturduğun aktivitelere eklediğin fotoğraflar ve bu aktivitelerin sohbet fotoğrafları.',
+  },
+  { label: 'Katılım isteklerin', text: 'Başka aktivitelere gönderdiğin katılım istekleri ve katılım kayıtların.' },
+  { label: 'Sohbet mesajların', text: 'Sohbetlerde gönderdiğin mesajlar.' },
+  {
+    label: 'Sohbet medyası',
+    text: 'Oluşturduğun aktivitelerin sohbetlerindeki fotoğraflar ve sesli mesajlar; hesabını sildiğin sırada katılımcısı olduğun diğer sohbetlere eklediğin fotoğraflar ve sesli mesajlar.',
+  },
+  { label: 'Engelleme kayıtları', text: 'Engellediğin kişiler ve seni engelleyenlerin kayıtları.' },
+  { label: 'Favori kayıtları', text: 'Favorilerine eklediğin kişiler ve seni favorilerine ekleyenlerin kayıtları.' },
+  { label: 'Bildirim token’ı', text: 'Cihazına bildirim gönderebilmek için saklanan kayıt.' },
+  { label: 'Doğrulama selfie’si', text: 'Hesap doğrulaması için gönderdiğin ve henüz silinmemiş bir selfie varsa.' },
+];
+
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Hesap ve veri silme',
+  url: absoluteUrl(path),
+  inLanguage: 'tr-TR',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  dateModified: lastmod,
+};
+---
+
+<Base title={title} description={description} path={path} jsonLd={[webPage]}>
+  <article class="container prose">
+    <header class="page-head">
+      <h1>Hesap ve veri silme</h1>
+      <p class="lead">
+        Gidelim hesabını nasıl silebileceğini, hangi verilerin silindiğini ve hangi kayıtların kalabileceğini bu sayfada
+        anlatıyoruz.
+      </p>
+    </header>
+
+    <h2>Uygulama içinden silme</h2>
+    <p>Gidelim uygulamasında Ayarlar bölümünden hesabını kalıcı olarak silebilirsin:</p>
+    <ol class="how-to">
+      <li><strong>Profil</strong> ekranında sağ üstteki dişli simgesine dokunarak <strong>Ayarlar</strong>’ı aç.</li>
+      <li><strong>Hesap</strong> bölümündeki <strong>Hesabı Sil</strong>’e dokun.</li>
+      <li>Açılan “Hesabını sil” uyarısında <strong>Hesabımı Sil</strong>’i seçerek onayla.</li>
+    </ol>
+    <p>Bu işlem geri alınamaz. Hesabın silindiğinde uygulamadaki oturumun da kapanır.</p>
+
+    <h2>Uygulamaya erişemiyorsan</h2>
+    <p>
+      Uygulamayı açamıyorsan (örneğin telefonunu kaybettiysen), Gidelim’e kayıtlı e-posta adresinden
+      <a href={contactMailto('Hesap silme talebi')}>{CONTACT_EMAIL}</a> adresine “Hesap silme talebi” konulu bir e-posta
+      göndermen yeterli.
+    </p>
+    <ul>
+      <li>Kimlik doğrulama için hesabına kayıtlı e-posta adresinden gelen talep esas alınır.</li>
+      <li>Talepler en geç 30 gün içinde sonuçlandırılır.</li>
+      <li>Şifreni e-postayla paylaşma; biz de senden istemeyiz.</li>
+    </ul>
+
+    <h2>Silinen veriler</h2>
+    <p>Hesabın silindiğinde aşağıdaki veriler de silinir:</p>
+    <ul>
+      {
+        DELETED_DATA.map((item) => (
+          <li>
+            <strong>{item.label}:</strong> {item.text}
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2>Silinmeyebilecek kayıtlar</h2>
+    <ul>
+      <li>
+        <strong>Sohbetlerdeki bilgi mesajları:</strong> Bir sohbetten ayrıldığında ya da çıkarıldığında o sohbete
+        “<em>adın</em> sohbetten ayrıldı.” şeklinde bir bilgi mesajı yazılır. Bu mesaj hesabına bağlı değildir, bu yüzden
+        hesabını silsen de o sohbette görünmeye devam edebilir.
+      </li>
+      <li>
+        <strong>Daha önce ayrıldığın sohbetlerdeki medya:</strong> Hesabını silmeden önce ayrıldığın ya da çıkarıldığın
+        sohbetlere gönderdiğin fotoğraf ve sesli mesaj dosyaları, hesap silme işlemi sırasında silinmeyebilir. Bunların
+        da silinmesini istersen <a href={contactMailto('Hesap silme talebi')}>{CONTACT_EMAIL}</a> adresine yazabilirsin.
+      </li>
+      <li>
+        <strong>Yasal yükümlülükler:</strong> Yasal saklama yükümlülüğü bulunan veriler, ilgili mevzuatta öngörülen süre
+        kadar saklanabilir.
+      </li>
+    </ul>
+
+    <p class="footnote">
+      Kişisel verilerinin nasıl işlendiği ve KVKK kapsamındaki hakların için
+      <a href="/gizlilik">Gizlilik Politikası</a>’na göz atabilirsin.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+    color: var(--muted);
+  }
+
+  .how-to {
+    padding-left: 1.4em;
+    margin: 0 0 1em;
+  }
+
+  .how-to li {
+    margin-bottom: 0.5em;
+  }
+
+  .how-to li::marker {
+    color: var(--brand-ink);
+    font-weight: 800;
+  }
+
+  .footnote {
+    margin-top: 2.5em;
+    padding-top: 1.5em;
+    border-top: 1px solid var(--border);
+  }
+</style>
